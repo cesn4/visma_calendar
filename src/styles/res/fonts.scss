@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Scope+One&display=swap');
+
+$font-family-primary: 'Scope One', serif;
+
+@function px-to-rem($_size) {
+    $rem-size: $_size / 16px;
+    @return #{$rem-size}rem;
+}
+
+$font-size-small: px-to-rem(15px);
+$font-size-medium: px-to-rem(20px);
+$font-size-large: px-to-rem(30px);

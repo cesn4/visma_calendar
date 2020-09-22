@@ -1,0 +1,17 @@
+$color-midnight: #114B5F;
+$color-queen: #456990;
+$color-light: #F9F9F9;
+$color-roze: #F45B69;
+$color-light-dark: #2d2e31;
+
+$theme-colors: (
+    accent: $color-midnight,
+    light: $color-light,
+    dark: $color-light-dark,
+    positive: $color-queen,
+    negative: $color-roze,
+);
+
+@function color($_key) {
+    @return map-get($theme-colors, $_key)
+}
