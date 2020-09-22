@@ -10,13 +10,10 @@ const Calendar: FunctionComponent = () => {
 
   // Month start blank days
   const firstWeekday = activeMonth.weekday;
-  let startBlankArray: Array<null> = [];
+  let startBlankArray: Array<number> = [];
   const startBlankDayNumber = firstWeekday - 1;
   if (startBlankDayNumber !== 0) {
-    startBlankArray = Array.from(
-      { length: startBlankDayNumber },
-      (_, i) => null
-    );
+    startBlankArray = Array.from({ length: startBlankDayNumber }, (_) => 0);
   }
 
   // Month days
@@ -28,13 +25,29 @@ const Calendar: FunctionComponent = () => {
   //Month end blank days
   const lastWeekday = DateTime.local(2019, 9, totalDaysNumber).weekday;
   const endBlankDayNumber = 7 - lastWeekday;
-  let endBlankArray: Array<null> = [];
+  let endBlankArray: Array<number> = [];
   if (endBlankDayNumber !== 0) {
-    endBlankArray = Array.from({ length: endBlankDayNumber }, (_, i) => null);
+    endBlankArray = Array.from({ length: endBlankDayNumber }, (_) => 0);
   }
 
   const finalDaysArray = [...startBlankArray, ...daysArray, ...endBlankArray];
-  console.log(finalDaysArray);
+
+  const daysFillter: Function = (day: number) => {
+    const array: Array<number> = finalDaysArray.filter((days, index) => {
+      return (
+        index + 1 === day ||
+        index + 1 === day + 7 ||
+        index + 1 === day + 14 ||
+        index + 1 === day + 21 ||
+        index + 1 === day + 28 ||
+        index + 1 === day + 35
+      );
+    });
+    return array;
+  };
+
+  console.log(daysFillter(1));
+
   const weekDays: Array<string> = [
     "Mon",
     "Tue",
@@ -44,6 +57,7 @@ const Calendar: FunctionComponent = () => {
     "Sat",
     "Sun",
   ];
+
   const renderWeekDays = weekDays.map((day, index) => {
     return (
       <div key={index.toString() + "days"} className={`${className}__days`}>
@@ -51,10 +65,6 @@ const Calendar: FunctionComponent = () => {
       </div>
     );
   });
-  console.log(daysArray);
-  console.log(activeMonth);
-  console.log(firstWeekday);
-  console.log(totalDaysNumber);
   return (
     <div className={className}>
       <div className={`${className}__week-days`}>{renderWeekDays}</div>
