@@ -27,7 +27,7 @@ const Calendar: FunctionComponent = () => {
   );
 
   //Month end blank days
-  const lastWeekday = DateTime.local(2019, 9, totalDaysNumber).weekday;
+  const lastWeekday = DateTime.local(2020, activeMonth, totalDaysNumber).weekday;
   const endBlankDayNumber = 7 - lastWeekday;
   let endBlankArray: Array<number> = [];
   if (endBlankDayNumber !== 0) {
