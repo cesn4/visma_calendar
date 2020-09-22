@@ -1,15 +1,19 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { DateTime } from "luxon";
 
 import "./Calendar.scss";
 
 const Calendar: FunctionComponent = () => {
   const className = "calendar";
-  const activeMonth = DateTime.local(2019, 9, 1);
-  const totalDaysNumber = activeMonth.daysInMonth;
+  const currentMonth = DateTime.local().month;
+  const [activeMonth, setActiveMonth] = useState(currentMonth);
+
+  const month = DateTime.local(2020, activeMonth, 1);
+  const totalDaysNumber = month.daysInMonth;
+  const monthName = month.monthLong;
 
   // Month start blank days
-  const firstWeekday = activeMonth.weekday;
+  const firstWeekday = month.weekday;
   let startBlankArray: Array<number> = [];
   const startBlankDayNumber = firstWeekday - 1;
   if (startBlankDayNumber !== 0) {
@@ -40,15 +44,15 @@ const Calendar: FunctionComponent = () => {
         index + 1 === day + 14 ||
         index + 1 === day + 21 ||
         index + 1 === day + 28 ||
-        index + 1 === day + 35
+        index + 1 === day + 35 ||
+        index + 1 === day + 42 ||
+        index + 1 === day + 49
       );
     });
     return array;
   };
 
-  console.log(daysFillter(1));
-
-  const weekDays: Array<string> = [
+  const weekdays: Array<string> = [
     "Mon",
     "Tue",
     "Wed",
@@ -58,16 +62,41 @@ const Calendar: FunctionComponent = () => {
     "Sun",
   ];
 
-  const renderWeekDays = weekDays.map((day, index) => {
+  const renderCalendarContent = weekdays.map((weekday, index) => {
+    const days = daysFillter(index + 1);
+    const renderDays = days.map((day: number, index: number) => {
+      return (
+        <div key={index.toString() + "day"} className={`${className}__day`}>
+          {day}
+        </div>
+      );
+    });
+
     return (
-      <div key={index.toString() + "days"} className={`${className}__days`}>
-        {day}
+      <div className={`${className}__column`}>
+        <div
+          key={index.toString() + "weekday"}
+          className={`${className}__weekday`}
+        >
+          {weekday}
+        </div>
+        {renderDays}
       </div>
     );
   });
+
   return (
     <div className={className}>
-      <div className={`${className}__week-days`}>{renderWeekDays}</div>
+      <span className={`${className}__month`}>{monthName}</span>
+      <div className={`${className}__box`}>{renderCalendarContent}</div>
+      <button
+        className={`${className}__button-back`}
+        onClick={() => setActiveMonth((e) => e - 1)}
+      ></button>
+      <button
+        className={`${className}__button-next`}
+        onClick={() => setActiveMonth((e) => e + 1)}
+      ></button>
     </div>
   );
 };
