@@ -27,7 +27,8 @@ const Calendar: FunctionComponent = () => {
   );
 
   //Month end blank days
-  const lastWeekday = DateTime.local(2020, activeMonth, totalDaysNumber).weekday;
+  const lastWeekday = DateTime.local(2020, activeMonth, totalDaysNumber)
+    .weekday;
   const endBlankDayNumber = 7 - lastWeekday;
   let endBlankArray: Array<number> = [];
   if (endBlankDayNumber !== 0) {
@@ -73,13 +74,11 @@ const Calendar: FunctionComponent = () => {
     });
 
     return (
-      <div className={`${className}__column`}>
-        <div
-          key={index.toString() + "weekday"}
-          className={`${className}__weekday`}
-        >
-          {weekday}
-        </div>
+      <div
+        key={index.toString() + "weekday"}
+        className={`${className}__column`}
+      >
+        <div className={`${className}__weekday`}>{weekday}</div>
         {renderDays}
       </div>
     );
