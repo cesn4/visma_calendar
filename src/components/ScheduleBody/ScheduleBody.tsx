@@ -13,24 +13,30 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
   const className = "schedule-body";
 
   const day = DateTime.fromISO(date).day;
-  const weekday = DateTime.fromISO(date).weekday;
   const month = DateTime.fromISO(date).month;
   const year = DateTime.fromISO(date).year;
-  const firstDay = DateTime.local(year, month, 1).weekday;
-  const weekdayShort: string = DateTime.fromISO(date).weekdayShort;
+  const firstWeekday = DateTime.local(year, month, 1).weekday;
+  const weekday = DateTime.fromISO(date).weekday;
+  const weekdayShort = DateTime.fromISO(date).weekdayShort;
 
   const oddWeekFilter: Function = (): boolean => {
     if (day === weekday || day === weekday + 14 || day === weekday + 28) {
       return true;
     } else return false;
   };
+
   const evenWeekFilter: Function = (): boolean => {
-    const negativeDay = weekday - firstDay + 1;
-    if (day === negativeDay + 7 || day === negativeDay + 21 || day === negativeDay + 35) {
+    const negativeDay = firstWeekday - weekday;
+    if (
+      day === weekday - negativeDay + 7 ||
+      day === weekday - negativeDay + 21 ||
+      day === weekday - negativeDay + 35
+    ) {
       return true;
     } else return false;
   };
 
+  // Rendering Event witch was created for one time only
   const renderUniqueEvents = uniqueEvents.map(
     (obj, index): ReactNode => {
       if (obj.date === date) {
@@ -45,9 +51,10 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
     }
   );
 
+  // rendering repetitive events for infinity period of time
   const renderRepetitiveEvents = repetitiveEvents.map(
     (obj, index): ReactNode => {
-      if (obj.daysToRepeat.includes(weekdayShort) && obj.repetition === "always") {
+      if (obj.daysToRepeat.includes(weekdayShort) && obj.always) {
         return (
           <div key={index.toString() + "repetitive event"}>
             <span>{obj.title}</span>
@@ -55,21 +62,25 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
             <span>{obj.about}</span>
           </div>
         );
-      } else if (
+      }
+      if (
         obj.daysToRepeat.includes(weekdayShort) &&
-        obj.repetition === "every two weeks" &&
-        weekday >= firstDay ? oddWeekFilter() : evenWeekFilter()
+        !obj.always &&
+        firstWeekday > weekday
+          ? evenWeekFilter()
+          : oddWeekFilter()
       ) {
         return (
-          <div key={index.toString() + "repetitive event unusual"}>
+          <div key={index.toString() + "repetitive kinda event"}>
             <span>{obj.title}</span>
             <span>{obj.time}</span>
             <span>{obj.about}</span>
           </div>
         );
-      } else return null;
+      }
     }
   );
+
   return (
     <div className={className}>
       {renderUniqueEvents}
