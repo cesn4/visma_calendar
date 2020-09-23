@@ -45,9 +45,7 @@ const Calendar: FunctionComponent = () => {
         index + 1 === day + 14 ||
         index + 1 === day + 21 ||
         index + 1 === day + 28 ||
-        index + 1 === day + 35 ||
-        index + 1 === day + 42 ||
-        index + 1 === day + 49
+        index + 1 === day + 35
       );
     });
     return array;
