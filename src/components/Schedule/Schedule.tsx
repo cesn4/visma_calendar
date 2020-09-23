@@ -14,7 +14,7 @@ const Schedule: FunctionComponent<ScheduleProps> = ({
   const day = activeDate.day;
   return (
     <div className={className}>
-      <div className={`${className}__label-box`}>
+      <div className={`${className}__box`}>
         <div className={`${className}__day-box`}>
           <span className={`${className}__day`}>{day}</span>
           <span className={`${className}__day`}>{weekday}</span>
