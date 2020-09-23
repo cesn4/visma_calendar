@@ -1,0 +1,16 @@
+.schedule {
+    display: flex;
+
+    &__box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__day {
+        margin: 0 5px;
+    }
+    &__date {
+        margin: 0 5px;
+    }
+}

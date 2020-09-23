@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 import { DateTime } from "luxon";
+import { Link } from "react-router-dom";
 
 import "./Calendar.scss";
 
@@ -64,10 +65,22 @@ const Calendar: FunctionComponent = () => {
   const renderCalendarContent = weekdays.map((weekday, index) => {
     const days = daysFillter(index + 1);
     const renderDays = days.map((day: number, index: number) => {
+      const monthISO = activeMonth.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+      const dayISO = day.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
       return (
-        <div key={index.toString() + "day"} className={`${className}__day`}>
+        <Link
+          to={`2020-${monthISO}-${dayISO}`}
+          key={index.toString() + "day"}
+          className={`${className}__day`}
+        >
           {day}
-        </div>
+        </Link>
       );
     });
 
