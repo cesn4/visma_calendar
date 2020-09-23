@@ -1,4 +1,4 @@
-type RepetitionType = "every two weeks";
+type RepetitionType = "every two weeks" | "always";
 
 export interface RepetetiveEventObject {
     title: string;
@@ -7,7 +7,7 @@ export interface RepetetiveEventObject {
     daysToRepeat: Array<string>;
     repetition?: RepetitionType;
     resetEveryMonth?: boolean;
-    always: boolean;
+    always?: boolean;
 }
 
 export interface UniqueEventObject {

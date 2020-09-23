@@ -12,12 +12,25 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
 }: ScheduleProps) => {
   const className = "schedule-body";
 
+  const day = DateTime.fromISO(date).day;
+  const weekday = DateTime.fromISO(date).weekday;
   const month = DateTime.fromISO(date).month;
   const year = DateTime.fromISO(date).year;
-  const monthInfo = DateTime.local(year, month, 1).weekday;
-  console.log(monthInfo)
+  const firstDay = DateTime.local(year, month, 1).weekday;
+  const weekdayShort: string = DateTime.fromISO(date).weekdayShort;
 
-  const weekday: string = DateTime.fromISO(date).weekdayShort;
+  const oddWeekFilter: Function = (): boolean => {
+    if (day === weekday || day === weekday + 14 || day === weekday + 28) {
+      return true;
+    } else return false;
+  };
+  const evenWeekFilter: Function = (): boolean => {
+    const negativeDay = weekday - firstDay + 1;
+    if (day === negativeDay + 7 || day === negativeDay + 21 || day === negativeDay + 35) {
+      return true;
+    } else return false;
+  };
+
   const renderUniqueEvents = uniqueEvents.map(
     (obj, index): ReactNode => {
       if (obj.date === date) {
@@ -34,9 +47,21 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
 
   const renderRepetitiveEvents = repetitiveEvents.map(
     (obj, index): ReactNode => {
-      if (obj.daysToRepeat.includes(weekday) && obj.always) {
+      if (obj.daysToRepeat.includes(weekdayShort) && obj.repetition === "always") {
         return (
           <div key={index.toString() + "repetitive event"}>
+            <span>{obj.title}</span>
+            <span>{obj.time}</span>
+            <span>{obj.about}</span>
+          </div>
+        );
+      } else if (
+        obj.daysToRepeat.includes(weekdayShort) &&
+        obj.repetition === "every two weeks" &&
+        weekday >= firstDay ? oddWeekFilter() : evenWeekFilter()
+      ) {
+        return (
+          <div key={index.toString() + "repetitive event unusual"}>
             <span>{obj.title}</span>
             <span>{obj.time}</span>
             <span>{obj.about}</span>

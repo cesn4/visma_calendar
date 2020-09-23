@@ -6,7 +6,7 @@ export const repetitiveEventsMock: Array<RepetetiveEventObject> = [
     about:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
     time: "10:00",
-    always: true,
+    repetition: 'always',
     daysToRepeat: ["Mon", "Tue", "Wed", "Thu", "Fri"],
   },
   {
