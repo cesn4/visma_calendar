@@ -11,30 +11,20 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
   uniqueEvents,
 }: ScheduleProps) => {
   const className = "schedule-body";
+  const activeDate = DateTime.fromISO(date);
+  const activeDay = activeDate.day;
+  const firstWeekday = DateTime.local(activeDate.year, activeDate.month, 1)
+    .weekday;
+  const baseDay = 1 + activeDate.weekday - firstWeekday;
 
-  const day = DateTime.fromISO(date).day;
-  const month = DateTime.fromISO(date).month;
-  const year = DateTime.fromISO(date).year;
-  const firstWeekday = DateTime.local(year, month, 1).weekday;
-  const weekday = DateTime.fromISO(date).weekday;
-  const weekdayShort = DateTime.fromISO(date).weekdayShort;
-
-  const oddWeekFilter: Function = (): boolean => {
-    if (day === weekday || day === weekday + 14 || day === weekday + 28) {
-      return true;
-    } else return false;
-  };
-
-  const evenWeekFilter: Function = (): boolean => {
-    const negativeDay = firstWeekday - weekday;
-    if (
-      day === weekday - negativeDay + 7 ||
-      day === weekday - negativeDay + 21 ||
-      day === weekday - negativeDay + 35
-    ) {
-      return true;
-    } else return false;
-  };
+  const evenCheckerBoolean =
+    activeDay === baseDay + 7 ||
+    activeDay === baseDay + 21 ||
+    activeDay === baseDay + 35;
+  const oddCheckerBoolean =
+    activeDay === baseDay ||
+    activeDay === baseDay + 14 ||
+    activeDay === baseDay + 28;
 
   // Rendering Event witch was created for one time only
   const renderUniqueEvents = uniqueEvents.map(
@@ -54,7 +44,7 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
   // rendering repetitive events for infinity period of time
   const renderRepetitiveEvents = repetitiveEvents.map(
     (obj, index): ReactNode => {
-      if (obj.daysToRepeat.includes(weekdayShort) && obj.always) {
+      if (obj.daysToRepeat.includes(activeDate.weekdayShort) && obj.always) {
         return (
           <div key={index.toString() + "repetitive event"}>
             <span>{obj.title}</span>
@@ -62,16 +52,15 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
             <span>{obj.about}</span>
           </div>
         );
-      }
-      if (
-        obj.daysToRepeat.includes(weekdayShort) &&
+      } else if (
+        obj.daysToRepeat.includes(activeDate.weekdayShort) &&
         !obj.always &&
-        firstWeekday > weekday
-          ? evenWeekFilter()
-          : oddWeekFilter()
+        (firstWeekday > activeDate.weekday
+          ? evenCheckerBoolean
+          : oddCheckerBoolean)
       ) {
         return (
-          <div key={index.toString() + "repetitive kinda event"}>
+          <div key={index.toString() + "kinda repetitive event"}>
             <span>{obj.title}</span>
             <span>{obj.time}</span>
             <span>{obj.about}</span>
