@@ -17,11 +17,11 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
     .weekday;
   const baseDay = 1 + activeDate.weekday - firstWeekday;
 
-  const evenCheckerBoolean =
+  const evenWeekDaysBoolean =
     activeDay === baseDay + 7 ||
     activeDay === baseDay + 21 ||
     activeDay === baseDay + 35;
-  const oddCheckerBoolean =
+  const oddWeekDaysBoolean =
     activeDay === baseDay ||
     activeDay === baseDay + 14 ||
     activeDay === baseDay + 28;
@@ -56,8 +56,8 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
         obj.daysToRepeat.includes(activeDate.weekdayShort) &&
         !obj.always &&
         (firstWeekday > activeDate.weekday
-          ? evenCheckerBoolean
-          : oddCheckerBoolean)
+          ? evenWeekDaysBoolean
+          : oddWeekDaysBoolean)
       ) {
         return (
           <div key={index.toString() + "kinda repetitive event"}>
@@ -66,7 +66,7 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
             <span>{obj.about}</span>
           </div>
         );
-      }
+      } else return null;
     }
   );
 
