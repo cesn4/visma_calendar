@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from "react";
 import { DateTime } from "luxon";
 
-import "./Schedule.scss";
+import "./ScheduleTitle.scss";
 
-const Schedule: FunctionComponent<ScheduleProps> = ({
+const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
   date,
-}: ScheduleProps) => {
-  const className = "schedule";
+}: ScheduleTitleProps) => {
+  const className = "schedule-title";
   const activeDate = DateTime.fromISO(date);
   const year = activeDate.year;
   const month = activeDate.monthLong;
@@ -28,8 +28,8 @@ const Schedule: FunctionComponent<ScheduleProps> = ({
   );
 };
 
-interface ScheduleProps {
+interface ScheduleTitleProps {
   date: string;
 }
 
-export default Schedule;
+export default ScheduleTitle;

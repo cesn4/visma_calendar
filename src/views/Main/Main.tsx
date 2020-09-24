@@ -1,15 +1,19 @@
 import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 
-import Schedule from "~/components/Schedule";
-import PrimaryLayout from "~/layouts/PrimaryLayout";
+import Calendar from "~/components/Calendar";
+import ScheduleContainer from "~/containers/ScheduleContainer";
+
+import './Main.scss';
 
 const Main: FunctionComponent = () => {
   const { slug } = useParams();
+  const className= 'main'
   return (
-    <PrimaryLayout>
-      <Schedule date={slug} />
-    </PrimaryLayout>
+    <div className={`${className}`}>
+      <Calendar />
+      <ScheduleContainer date={slug} />
+    </div>
   );
 };
 

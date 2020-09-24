@@ -1,23 +1,13 @@
-export type WeekdayType = "Mon" |
-"Tue" |
-"Wed" |
-"Thu" |
-"Fri" |
-"Sat" |
-"Sun"
-
-type RepetitionType = "oddWeeks" | "evenWeeks";
+type RepetitionType = "every two weeks" | "always";
 
 export interface RepetetiveEventObject {
     title: string;
     about: string;
     time: string;
-    daysToRepeat: Array<WeekdayType>;
-    repetition: RepetitionType;
+    daysToRepeat: Array<string>;
+    repetition?: RepetitionType;
     resetEveryMonth?: boolean;
-    always: boolean;
-    startDate?: string;
-    endDate?: string;
+    always?: boolean;
 }
 
 export interface UniqueEventObject {

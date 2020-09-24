@@ -2,6 +2,8 @@ import React, { FunctionComponent, useState } from "react";
 import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
 
+import { weekdays } from "~/mock/weekdays";
+
 import "./Calendar.scss";
 
 const Calendar: FunctionComponent = () => {
@@ -51,16 +53,6 @@ const Calendar: FunctionComponent = () => {
     });
     return array;
   };
-
-  const weekdays: Array<string> = [
-    "Mon",
-    "Tue",
-    "Wed",
-    "Thu",
-    "Fri",
-    "Sat",
-    "Sun",
-  ];
 
   const renderCalendarContent = weekdays.map((weekday, index) => {
     const days = daysFillter(index + 1);
