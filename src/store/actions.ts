@@ -21,3 +21,9 @@ export const AddRepetitiveEvent = (payload: RepetetiveEventObject): void => {
 export const AddUniqueEvent = (payload: UniqueEventObject): void => {
   store.dispatch({ type: ActionTypes.addUniqueEvent, payload: payload });
 };
+export const SetCalendarState = (payload: boolean): void => {
+  store.dispatch({ type: ActionTypes.setCalendarState, payload: payload });
+};
+export const SetEventFormState = (payload: boolean): void => {
+  store.dispatch({ type: ActionTypes.setEventFormState, payload: payload });
+};

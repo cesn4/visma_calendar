@@ -8,6 +8,8 @@ const initialState: ApplicationState = {
   activeCalendarYear: 2020,
   repetitiveEvents: repetitiveEventsMock,
   uniqueEvents: uniqueEventMock,
+  calendarState: false,
+  eventFormState: false,
 };
 
 export default initialState;

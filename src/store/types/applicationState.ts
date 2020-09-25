@@ -6,4 +6,6 @@ export interface ApplicationState {
   activeCalendarYear: number;
   repetitiveEvents: Array<RepetetiveEventObject>;
   uniqueEvents: Array<UniqueEventObject>;
+  calendarState: boolean;
+  eventFormState: boolean;
 }
