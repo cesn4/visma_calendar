@@ -11,8 +11,12 @@
     border: none;
     background-color: transparent;
     border-bottom: 1px solid color(dark);
-    font-family: $font-family-primary;
     font-size: $font-size-sm;
     color: color(dark);
+
+    &::placeholder {
+      font-size: $font-size-m;
+      color: color(dark);
+    }
   }
 }
