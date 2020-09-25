@@ -10,10 +10,12 @@ import "./Main.scss";
 import { ApplicationState } from "~/store/types/applicationState";
 import { connect } from "react-redux";
 import EventForm from "~/sections/EventForm";
+import { EventObject } from "~/store/types/eventTypes";
 
 const Main: FunctionComponent<MainReduxProps> = ({
   eventFormState,
   calendarState,
+  events,
 }: MainReduxProps) => {
   const className = "main";
   const { slug } = useParams();
@@ -44,7 +46,7 @@ const Main: FunctionComponent<MainReduxProps> = ({
                   "-active": eventFormState,
                 })}
               >
-                <EventForm />
+                <EventForm events={events}/>
               </div>
             </Col>
           </Row>
@@ -57,12 +59,14 @@ const Main: FunctionComponent<MainReduxProps> = ({
 interface MainReduxProps {
   calendarState: boolean;
   eventFormState: boolean;
+  events: Array<EventObject>;
 }
 
 const mapStateToProps = (state: ApplicationState): MainReduxProps => {
   return {
     calendarState: state.calendarState,
     eventFormState: state.eventFormState,
+    events: state.events,
   };
 };
 

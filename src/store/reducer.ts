@@ -10,18 +10,6 @@ const reducer = (state = initialState, action: Actions): ApplicationState => {
         currentDate: action.payload,
       };
     }
-    case ActionTypes.setActiveCalendarMonth: {
-      return {
-        ...state,
-        activeCalendarMonth: action.payload,
-      };
-    }
-    case ActionTypes.setActiveCalendarYear: {
-      return {
-        ...state,
-        activeCalendarYear: action.payload,
-      };
-    }
     case ActionTypes.setCalendarState: {
       return {
         ...state,
@@ -34,20 +22,10 @@ const reducer = (state = initialState, action: Actions): ApplicationState => {
         eventFormState: action.payload,
       };
     }
-    case ActionTypes.addRepetitiveEvent: {
-      let newArray = state.repetitiveEvents;
-      newArray.push(action.payload);
+    case ActionTypes.addEvent: {
       return {
         ...state,
-        repetitiveEvents: newArray,
-      };
-    }
-    case ActionTypes.addUniqueEvent: {
-      let newArray = state.uniqueEvents;
-      newArray.push(action.payload);
-      return {
-        ...state,
-        uniqueEvents: newArray,
+        events: action.payload,
       };
     }
     default: {

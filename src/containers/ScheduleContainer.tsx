@@ -4,24 +4,15 @@ import { connect } from "react-redux";
 import Schedule from "~/sections/Schedule";
 import { ApplicationState } from "~/store/types/applicationState";
 import {
-  RepetetiveEventObject,
-  UniqueEventObject,
+  EventObject,
 } from "~/store/types/eventTypes";
 
 const ScheduleContainer: FunctionComponent<CombinedScheduleProps> = ({
   date,
-  repetitiveEvents,
-  uniqueEvents,
+  events,
   calendarState,
 }: CombinedScheduleProps) => {
-  return (
-    <Schedule
-      calendarState={calendarState}
-      date={date}
-      repetitiveEvents={repetitiveEvents}
-      uniqueEvents={uniqueEvents}
-    />
-  );
+  return <Schedule calendarState={calendarState} date={date} events={events} />;
 };
 
 interface ScheduleContainerProps {
@@ -29,8 +20,7 @@ interface ScheduleContainerProps {
 }
 
 interface ScheduleReduxProps {
-  repetitiveEvents: Array<RepetetiveEventObject>;
-  uniqueEvents: Array<UniqueEventObject>;
+  events: Array<EventObject>;
   calendarState: boolean;
 }
 
@@ -38,8 +28,7 @@ export type CombinedScheduleProps = ScheduleContainerProps & ScheduleReduxProps;
 
 const mapStateToProps = (state: ApplicationState): ScheduleReduxProps => {
   return {
-    repetitiveEvents: state.repetitiveEvents,
-    uniqueEvents: state.uniqueEvents,
+    events: state.events,
     calendarState: state.calendarState,
   };
 };

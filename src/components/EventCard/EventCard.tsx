@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from "react";
-import {
-  RepetetiveEventObject,
-  UniqueEventObject,
-} from "~/store/types/eventTypes";
+import { EventObject } from "~/store/types/eventTypes";
 
 import "./EventCard.scss";
 
@@ -22,7 +19,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({
 };
 
 interface EventCardProps {
-  data: UniqueEventObject | RepetetiveEventObject;
+  data: EventObject;
 }
 
 export default EventCard;

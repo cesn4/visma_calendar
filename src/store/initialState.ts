@@ -1,13 +1,9 @@
-import { repetitiveEventsMock } from '~/mock/repetitiveEventsMock';
-import { uniqueEventMock } from '~/mock/uniqueEventsMock';
+import { eventMock } from '~/mock/eventMock';
 import { ApplicationState } from './types/applicationState';
 
 const initialState: ApplicationState = {
   currentDate: '',
-  activeCalendarMonth: 1,
-  activeCalendarYear: 2020,
-  repetitiveEvents: repetitiveEventsMock,
-  uniqueEvents: uniqueEventMock,
+  events: eventMock,
   calendarState: false,
   eventFormState: false,
 };

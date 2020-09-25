@@ -4,16 +4,14 @@ import FancyButton from "~/components/FancyButton";
 import FancyInput from "~/components/FancyInput";
 import FancySelect from "~/components/FancySelect";
 import { weekdays } from "~/mock/weekdays";
-import {
-  AddRepetitiveEvent,
-  AddUniqueEvent,
-  SetEventFormState,
-} from "~/store/actions";
-import { RepetitionType } from "~/store/types/eventTypes";
+import { AddEvent, SetEventFormState } from "~/store/actions";
+import { EventObject, RepetitionType } from "~/store/types/eventTypes";
 
 import "./EventForm.scss";
 
-const EventForm: FunctionComponent = () => {
+const EventForm: FunctionComponent<EventFormProps> = ({
+  events,
+}: EventFormProps) => {
   const className = "event-form";
   const repetitionOptions: Array<RepetitionType> = [
     "Once",
@@ -26,7 +24,7 @@ const EventForm: FunctionComponent = () => {
     time: "",
     date: "",
     repetition: "Once",
-    daysToRepeat: [],
+    daysToRepeat: [""],
   });
 
   const handleChange = (e: any) => {
@@ -37,9 +35,7 @@ const EventForm: FunctionComponent = () => {
   };
 
   const saveHandler = () => {
-    eventInformation.repetition === "Once"
-      ? AddUniqueEvent(eventInformation)
-      : AddRepetitiveEvent(eventInformation);
+    AddEvent([...events, eventInformation]);
     SetEventFormState(false);
   };
 
@@ -95,5 +91,9 @@ const EventForm: FunctionComponent = () => {
     </div>
   );
 };
+
+interface EventFormProps {
+  events: Array<EventObject>;
+}
 
 export default EventForm;

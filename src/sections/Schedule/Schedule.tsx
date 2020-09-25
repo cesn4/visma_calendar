@@ -7,8 +7,7 @@ import "./Schedule.scss";
 
 const Schedule: FunctionComponent<CombinedScheduleProps> = ({
   date,
-  repetitiveEvents,
-  uniqueEvents,
+  events,
   calendarState,
 }: CombinedScheduleProps) => {
   const className = "schedule";
@@ -18,11 +17,7 @@ const Schedule: FunctionComponent<CombinedScheduleProps> = ({
         <ScheduleTitle calendarState={calendarState} date={date} />
       </div>
       <div className={`${className}__body`}>
-        <ScheduleBody
-          repetitiveEvents={repetitiveEvents}
-          uniqueEvents={uniqueEvents}
-          date={date}
-        />
+        <ScheduleBody events={events} date={date} />
       </div>
     </div>
   );

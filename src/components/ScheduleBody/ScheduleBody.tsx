@@ -2,14 +2,13 @@ import React, { FunctionComponent, ReactNode } from "react";
 import { DateTime } from "luxon";
 
 import EventCard from "../EventCard";
-import { RepetetiveEventObject, UniqueEventObject } from "~/store/types/eventTypes";
+import { EventObject } from "~/store/types/eventTypes";
 
 import "./ScheduleBody.scss";
 
 const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
   date,
-  repetitiveEvents,
-  uniqueEvents,
+  events,
 }: ScheduleBodyProps) => {
   const className = "schedule-body";
   const activeDate = DateTime.fromISO(date);
@@ -27,27 +26,19 @@ const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
     activeDay === baseDay + 14 ||
     activeDay === baseDay + 28;
 
-  // Rendering Event witch was created for one time only
-  const renderUniqueEvents = uniqueEvents.map(
-    (obj, index): ReactNode => {
-      if (obj.date === date) {
-        return (
-          <EventCard key={index.toString() + " unique event"} data={obj} />
-        );
-      } else return null;
-    }
-  );
-
   // rendering repetitive events for infinity period of time
-  const renderRepetitiveEvents = repetitiveEvents.map(
+  const renderEvents = events.map(
     (obj, index): ReactNode => {
-      if (obj.daysToRepeat.includes(activeDate.weekdayShort) && obj.always) {
+      if (
+        obj.daysToRepeat?.includes(activeDate.weekdayShort) &&
+        obj.repetition === "Always"
+      ) {
         return (
           <EventCard key={index.toString() + " repetitive event"} data={obj} />
         );
       } else if (
-        obj.daysToRepeat.includes(activeDate.weekdayShort) &&
-        !obj.always &&
+        obj.daysToRepeat?.includes(activeDate.weekdayShort) &&
+        obj.repetition === "Every two weeks" &&
         (firstWeekday > activeDate.weekday
           ? evenWeekDaysBoolean
           : oddWeekDaysBoolean)
@@ -58,21 +49,19 @@ const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
             data={obj}
           />
         );
+      } else if (obj.repetition === "Once" && obj.date === date) {
+        return (
+          <EventCard key={index.toString() + " unique event"} data={obj} />
+        );
       } else return null;
     }
   );
 
-  return (
-    <div className={className}>
-      {renderRepetitiveEvents}
-      {renderUniqueEvents}
-    </div>
-  );
+  return <div className={className}>{renderEvents}</div>;
 };
 
 interface ScheduleBodyProps {
-  repetitiveEvents: Array<RepetetiveEventObject>;
-  uniqueEvents: Array<UniqueEventObject>;
+  events: Array<EventObject>;
   date: string;
 }
 
