@@ -7,8 +7,8 @@ const SVGLeftArrow: FunctionComponent<SVGIconsProps> = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width={color}
-      height={color}
+      width={size}
+      height={size}
       viewBox="0 0 29.25 29.25"
     >
       <g
