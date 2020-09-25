@@ -8,10 +8,10 @@
 
   &.-smaller {
     #{$_parent}__input {
-      font-size: $font-size-m;
+      font-size: $font-size-sm;
 
       &::placeholder {
-        font-size: $font-size-m;
+        font-size: $font-size-sm;
       }
     }
   }
@@ -23,11 +23,11 @@
     background-color: transparent;
     border-bottom: 1px solid color(dark);
     font-family: $font-family-primary;
-    font-size: $font-size-l;
+    font-size: $font-size-m;
     color: color(dark);
 
     &::placeholder {
-      font-size: $font-size-l;
+      font-size: $font-size-m;
       color: color(dark);
     }
   }

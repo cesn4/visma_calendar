@@ -7,6 +7,11 @@
   justify-content: space-between;
   padding-left: 40px;
 
+  @include if-tablet {
+    padding: 0 40px;
+    justify-content: center;
+  }
+
   &__label-box {
     display: flex;
     flex-direction: column;
@@ -16,11 +21,22 @@
 
   &__label {
     text-transform: uppercase;
-    font-size: $font-size-m;
+    font-size: $font-size-sm;
+
+    @include if-desktop-xl {
+      font-size: $font-size-m;
+    }
 
     &.-weekday {
       margin-top: 10px;
-      font-size: $font-size-l;
+
+      @include if-desktop {
+        font-size: $font-size-mm;
+      }
+
+      @include if-desktop-xl {
+        font-size: $font-size-ml;
+      }
     }
   }
 
@@ -33,12 +49,21 @@
     width: 130px;
     background-color: color(dark);
     border-radius: $border-primary;
+
+    @include if-desktop-xl {
+      height: 175px;
+      width: 195px;
+    }
   }
 
   &__day {
     position: absolute;
     font-size: $font-size-xl;
     color: color(light);
+
+    @include if-desktop-xl {
+      font-size: $font-size-xxl;
+    }
   }
 
   &__button-box {
@@ -51,9 +76,20 @@
     background-color: color(dark);
     border-bottom-left-radius: $border-secondary;
     border-top-left-radius: $border-secondary;
+    box-shadow: $shadow-full;
+
+    @include if-tablet {
+      height: fit-content;
+      padding: 20px;
+      border-radius: $border-primary;
+    }
   }
 
   &__calendar-icon {
     margin-bottom: 40px;
+
+    @include if-tablet {
+      display: none;
+    }
   }
 }

@@ -25,11 +25,12 @@ const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
         <span className={`${className}__label -weekday`}>{weekday}</span>
       </div>
       <div className={`${className}__button-box`}>
-        <Icon
-          onClick={() => SetCalendarState(!calendarState)}
-          name="calendar"
-          className={`${className}__calendar-icon`}
-        />
+        <div className={`${className}__calendar-icon`}>
+          <Icon
+            onClick={() => SetCalendarState(!calendarState)}
+            name="calendar"
+          />
+        </div>
         <Icon name="add" onClick={() => SetEventFormState(true)} />
       </div>
     </div>

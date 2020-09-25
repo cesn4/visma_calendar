@@ -2,6 +2,15 @@
     display: flex;
     flex-direction: column;
 
+    @include if-tablet {
+        width: 40vw;
+        margin-left: auto;
+    }
+
+    @include if-desktop {
+        width: 35vw;
+    }
+
     &__title {
         display: flex;
         justify-content: center;

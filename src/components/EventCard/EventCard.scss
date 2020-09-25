@@ -7,6 +7,14 @@
     margin-bottom: 20px;
     box-shadow: $shadow-bottom;
 
+    @include if-tablet {
+        padding: 25px 30px 25px 30px;
+    }
+
+    @include if-desktop {
+        margin-bottom: 30px;
+    }
+
     &__title-box {
         display: flex;
         width: 100%;
@@ -15,17 +23,29 @@
     }
 
     &__time {
-        font-size: $font-size-l;
+        font-size: $font-size-m;
         text-align: center;
+
+        @include if-desktop-xl {
+            font-size: $font-size-ml;
+        }
     }
 
     &__title {
-        font-size: $font-size-m;
+        font-size: $font-size-sm;
         text-transform: uppercase;
+
+        @include if-desktop-xl {
+            font-size: $font-size-m;
+        }
     }
 
     &__about {
         font-size: $font-size-s;
         font-style: italic;
+
+        @include if-desktop-xl {
+            font-size: $font-size-sm;
+        }
     }
 }

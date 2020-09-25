@@ -18,6 +18,19 @@
       opacity: 1;
       transform: none;
     }
+
+    @include if-tablet {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      height: 100vh;
+      width: 60vw;
+      left: 0;
+    }
+
+    @include if-desktop {
+      width: 65vw;
+    }
   }
 
   &__event-form {
