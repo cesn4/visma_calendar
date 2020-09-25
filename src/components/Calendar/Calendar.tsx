@@ -1,12 +1,13 @@
 import React, { FunctionComponent, useState } from "react";
 import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
 import { weekdays } from "~/mock/weekdays";
-
-import "./Calendar.scss";
 import Icon from "../Icons";
 import { SetCalendarState } from "~/store/actions";
+
+import "./Calendar.scss";
 
 const Calendar: FunctionComponent = () => {
   const className = "calendar";
@@ -71,7 +72,9 @@ const Calendar: FunctionComponent = () => {
         <Link
           to={`2020-${monthISO}-${dayISO}`}
           key={index.toString() + "day"}
-          className={`${className}__day`}
+          className={classNames(`${className}__day`, {
+            "-blank": day === 0,
+          })}
           onClick={() => SetCalendarState(false)}
         >
           {day}

@@ -77,6 +77,10 @@
     text-decoration: none;
     color: color(dark);
 
+    &.-blank {
+      visibility: hidden;
+    }
+
     @include if-tablet {
       font-size: $font-size-ml;
     }
@@ -90,5 +94,9 @@
     display: flex;
     border: none;
     background-color: color(dark);
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

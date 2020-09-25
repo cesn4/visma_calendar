@@ -78,6 +78,10 @@
     border-top-left-radius: $border-secondary;
     box-shadow: $shadow-full;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     @include if-tablet {
       height: fit-content;
       padding: 20px;

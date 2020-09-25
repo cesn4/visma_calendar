@@ -10,4 +10,8 @@
     color: color(light);
     background-color: color(dark);
     box-shadow: $shadow-full;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
