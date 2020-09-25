@@ -4,6 +4,7 @@ import { DateTime } from "luxon";
 import { ScheduleProps } from "~/sections/Schedule/Schedule";
 
 import "./ScheduleBody.scss";
+import EventCard from "../EventCard";
 
 const ScheduleBody: FunctionComponent<ScheduleProps> = ({
   date,
@@ -31,11 +32,7 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
     (obj, index): ReactNode => {
       if (obj.date === date) {
         return (
-          <div key={index.toString() + "unique event"}>
-            <span>{obj.title}</span>
-            <span>{obj.time}</span>
-            <span>{obj.about}</span>
-          </div>
+          <EventCard key={index.toString() + " unique event"} data={obj} />
         );
       } else return null;
     }
@@ -46,11 +43,7 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
     (obj, index): ReactNode => {
       if (obj.daysToRepeat.includes(activeDate.weekdayShort) && obj.always) {
         return (
-          <div key={index.toString() + "repetitive event"}>
-            <span>{obj.title}</span>
-            <span>{obj.time}</span>
-            <span>{obj.about}</span>
-          </div>
+          <EventCard key={index.toString() + " repetitive event"} data={obj} />
         );
       } else if (
         obj.daysToRepeat.includes(activeDate.weekdayShort) &&
@@ -60,11 +53,10 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
           : oddWeekDaysBoolean)
       ) {
         return (
-          <div key={index.toString() + "kinda repetitive event"}>
-            <span>{obj.title}</span>
-            <span>{obj.time}</span>
-            <span>{obj.about}</span>
-          </div>
+          <EventCard
+            key={index.toString() + " kinda repetitive event"}
+            data={obj}
+          />
         );
       } else return null;
     }
@@ -72,8 +64,8 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
 
   return (
     <div className={className}>
-      {renderUniqueEvents}
       {renderRepetitiveEvents}
+      {renderUniqueEvents}
     </div>
   );
 };

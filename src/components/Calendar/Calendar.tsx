@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { weekdays } from "~/mock/weekdays";
 
 import "./Calendar.scss";
+import Icon from "../Icons";
 
 const Calendar: FunctionComponent = () => {
   const className = "calendar";
@@ -89,16 +90,25 @@ const Calendar: FunctionComponent = () => {
 
   return (
     <div className={className}>
-      <span className={`${className}__month`}>{monthName}</span>
-      <div className={`${className}__box`}>{renderCalendarContent}</div>
-      <button
-        className={`${className}__button-back`}
-        onClick={() => setActiveMonth((e) => e - 1)}
-      ></button>
-      <button
-        className={`${className}__button-next`}
-        onClick={() => setActiveMonth((e) => e + 1)}
-      ></button>
+      <div className={`${className}__date-box`}>
+        <button
+          className={`${className}__button`}
+          onClick={() => setActiveMonth((e) => e - 1)}
+        >
+          <Icon name="leftArrow" size={30} />
+        </button>
+        <span className={`${className}__label`}>{monthName}</span>
+        <span className={`${className}__label`}>{month.year}</span>
+        <button
+          className={`${className}__button`}
+          onClick={() => setActiveMonth((e) => e + 1)}
+        >
+          <Icon name="rightArrow" size={30} />
+        </button>
+      </div>
+      <div className={`${className}__calendar-box`}>
+        {renderCalendarContent}
+      </div>
     </div>
   );
 };

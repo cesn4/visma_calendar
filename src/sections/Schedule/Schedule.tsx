@@ -16,12 +16,16 @@ const Schedule: FunctionComponent<ScheduleProps> = ({
   const className = "schedule";
   return (
     <div className={className}>
-      <ScheduleTitle date={date} />
-      <ScheduleBody
-        repetitiveEvents={repetitiveEvents}
-        uniqueEvents={uniqueEvents}
-        date={date}
-      />
+      <div className={`${className}__title`}>
+        <ScheduleTitle date={date} />
+      </div>
+      <div className={`${className}__body`}>
+        <ScheduleBody
+          repetitiveEvents={repetitiveEvents}
+          uniqueEvents={uniqueEvents}
+          date={date}
+        />
+      </div>
     </div>
   );
 };
