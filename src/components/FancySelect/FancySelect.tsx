@@ -6,6 +6,7 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   name,
   id,
   options,
+  handleChange,
 }: FancySelectProps) => {
   const className = "fancy-select";
   const renderOptions = options.map((value) => {
@@ -17,7 +18,7 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   });
   return (
     <div className={`${className}`}>
-      <select className={`${className}__input`} name={name} id={id}>
+      <select onChange={handleChange} className={`${className}__input`} name={name} id={id}>
         {renderOptions}
       </select>
     </div>
@@ -28,6 +29,7 @@ interface FancySelectProps {
   name: string;
   id: string;
   options: Array<string>;
+  handleChange: any;
 }
 
 export default FancySelect;

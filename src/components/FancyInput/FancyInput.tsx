@@ -8,6 +8,7 @@ const FancyInput: FunctionComponent<FancyInputProps> = ({
   id,
   type,
   smaller = false,
+  handleChange,
 }: FancyInputProps) => {
   const className = "fancy-input";
   return (
@@ -15,6 +16,7 @@ const FancyInput: FunctionComponent<FancyInputProps> = ({
       "-smaller": smaller,
     })}>
       <input
+      onChange={handleChange}
         id={id}
         className={`${className}__input`}
         type={type}
@@ -29,6 +31,7 @@ interface FancyInputProps {
   id: string;
   type: string;
   smaller?: boolean;
+  handleChange: any;
 }
 
 export default FancyInput;

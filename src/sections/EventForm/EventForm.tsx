@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 import FancyButton from "~/components/FancyButton";
 
 import FancyInput from "~/components/FancyInput";
@@ -15,10 +15,30 @@ const EventForm: FunctionComponent = () => {
     "Always",
     "Every two weeks",
   ];
+  const [eventInformation, setEventInformation] = useState({
+    title: "",
+    about: "",
+    time: "",
+    date: "",
+    repetition: "",
+  });
+  console.log(eventInformation);
+  const handleChange = (e: any) => {
+    setEventInformation({
+      ...eventInformation,
+      [e.target.id]: e.target.value,
+    });
+  };
   return (
     <div className={className}>
-      <FancyInput type="text" id="title" placeholder="Add Title" />
       <FancyInput
+        handleChange={handleChange}
+        type="text"
+        id="title"
+        placeholder="Add Title"
+      />
+      <FancyInput
+        handleChange={handleChange}
         smaller
         type="text"
         id="about"
@@ -27,6 +47,7 @@ const EventForm: FunctionComponent = () => {
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Repetition</span>
         <FancySelect
+          handleChange={handleChange}
           name="Repetition"
           id="repetition"
           options={repetitionOptions}
@@ -34,11 +55,11 @@ const EventForm: FunctionComponent = () => {
       </div>
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Time</span>
-        <FancyInput type="time" id="time" />
+        <FancyInput handleChange={handleChange} type="time" id="time" />
       </div>
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Date</span>
-        <FancyInput type="date" id="date" />
+        <FancyInput handleChange={handleChange} type="date" id="date" />
       </div>
       <div className={`${className}__button-box`}>
         <FancyButton label="Cancel" onClick={() => {}} />
