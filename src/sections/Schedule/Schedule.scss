@@ -1,4 +1,15 @@
 .schedule {
     display: flex;
     flex-direction: column;
+
+    &__title {
+        display: flex;
+        justify-content: center;
+        height: 40vh;
+    }
+
+    &__body {
+        height: 100%;
+        padding-left: 40px;
+    }
 }
