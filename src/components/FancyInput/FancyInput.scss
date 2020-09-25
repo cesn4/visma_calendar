@@ -1,9 +1,20 @@
 .fancy-input {
+  $_parent: &;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 80px;
   width: 100%;
+
+  &.-smaller {
+    #{$_parent}__input {
+      font-size: $font-size-m;
+
+      &::placeholder {
+        font-size: $font-size-m;
+      }
+    }
+  }
 
   &__input {
     height: 100%;
@@ -12,7 +23,7 @@
     background-color: transparent;
     border-bottom: 1px solid color(dark);
     font-family: $font-family-primary;
-    font-size: $font-size-m;
+    font-size: $font-size-l;
     color: color(dark);
 
     &::placeholder {

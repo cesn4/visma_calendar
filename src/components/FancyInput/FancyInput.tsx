@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import classNames from "classnames";
 
 import "./FancyInput.scss";
 
@@ -6,10 +7,13 @@ const FancyInput: FunctionComponent<FancyInputProps> = ({
   placeholder,
   id,
   type,
+  smaller = false,
 }: FancyInputProps) => {
   const className = "fancy-input";
   return (
-    <div className={className}>
+    <div  className={classNames(`${className}`, {
+      "-smaller": smaller,
+    })}>
       <input
         id={id}
         className={`${className}__input`}
@@ -24,6 +28,7 @@ interface FancyInputProps {
   placeholder?: string;
   id: string;
   type: string;
+  smaller?: boolean;
 }
 
 export default FancyInput;

@@ -18,7 +18,12 @@ const EventForm: FunctionComponent = () => {
   return (
     <div className={className}>
       <FancyInput type="text" id="title" placeholder="Add Title" />
-      <FancyInput type="text" id="about" placeholder="Add Description" />
+      <FancyInput
+        smaller
+        type="text"
+        id="about"
+        placeholder="Add Description"
+      />
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Repetition</span>
         <FancySelect
@@ -36,8 +41,8 @@ const EventForm: FunctionComponent = () => {
         <FancyInput type="date" id="date" />
       </div>
       <div className={`${className}__button-box`}>
-        <FancyButton label='Cancel' onClick={() => {}}/>
-        <FancyButton label='Save' onClick={() => {}}/>
+        <FancyButton label="Cancel" onClick={() => {}} />
+        <FancyButton label="Save" onClick={() => {}} />
       </div>
     </div>
   );
