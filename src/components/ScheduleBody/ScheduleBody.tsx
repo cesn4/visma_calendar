@@ -64,8 +64,8 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
 
   return (
     <div className={className}>
-      {renderUniqueEvents}
       {renderRepetitiveEvents}
+      {renderUniqueEvents}
     </div>
   );
 };
