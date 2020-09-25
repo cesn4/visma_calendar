@@ -8,16 +8,17 @@ import {
 
 import "./Schedule.scss";
 
-const Schedule: FunctionComponent<ScheduleProps> = ({
+const Schedule: FunctionComponent<ScheduleProps & ReduxCalendarState> = ({
   date,
   repetitiveEvents,
   uniqueEvents,
-}: ScheduleProps) => {
+  calendarState,
+}: ScheduleProps & ReduxCalendarState) => {
   const className = "schedule";
   return (
     <div className={className}>
       <div className={`${className}__title`}>
-        <ScheduleTitle date={date} />
+        <ScheduleTitle calendarState={calendarState} date={date} />
       </div>
       <div className={`${className}__body`}>
         <ScheduleBody
@@ -34,6 +35,10 @@ export interface ScheduleProps {
   date: string;
   repetitiveEvents: Array<RepetetiveEventObject>;
   uniqueEvents: Array<UniqueEventObject>;
+}
+
+interface ReduxCalendarState {
+  calendarState: boolean;
 }
 
 export default Schedule;

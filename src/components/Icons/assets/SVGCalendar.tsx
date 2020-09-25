@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 
-const SVGAdd: FunctionComponent<SVGIconsProps> = ({
+const SVGCalendar: FunctionComponent<SVGIconsProps> = ({
   color,
   size,
 }: SVGIconsProps) => {
@@ -26,4 +26,4 @@ interface SVGIconsProps {
   color: string;
 }
 
-export default SVGAdd;
+export default SVGCalendar;

@@ -1,13 +1,19 @@
 import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-grid-system";
+import classNames from "classnames";
 
 import ScheduleContainer from "~/containers/ScheduleContainer";
-
-import "./Main.scss";
 import Calendar from "~/components/Calendar";
 
-const Main: FunctionComponent = () => {
+import "./Main.scss";
+import { ApplicationState } from "~/store/types/applicationState";
+import { connect } from "react-redux";
+
+const Main: FunctionComponent<MainReduxProps> = ({
+  eventFormState,
+  calendarState,
+}: MainReduxProps) => {
   const { slug } = useParams();
   const className = "main";
   return (
@@ -21,7 +27,11 @@ const Main: FunctionComponent = () => {
           </Row>
           <Row>
             <Col>
-              <div className={`${className}__calendar`}>
+              <div
+                className={classNames(`${className}__calendar`, {
+                  "-active": calendarState,
+                })}
+              >
                 <Calendar />
               </div>
             </Col>
@@ -32,4 +42,16 @@ const Main: FunctionComponent = () => {
   );
 };
 
-export default Main;
+interface MainReduxProps {
+  calendarState: boolean;
+  eventFormState: boolean;
+}
+
+const mapStateToProps = (state: ApplicationState): MainReduxProps => {
+  return {
+    calendarState: state.calendarState,
+    eventFormState: state.eventFormState,
+  };
+};
+
+export default connect(mapStateToProps)(Main);

@@ -4,9 +4,19 @@
     min-height: 100vh;
 
     &__calendar {
+        visibility: hidden;
+        opacity: 0;
         position: fixed;
         bottom: 0;
         height: 60vh;
         width: 100vw;
+        transform: translateY(10%);
+        transition: cta-transition([visibility opacity transform]);
+
+        &.-active {
+            visibility: visible;
+            opacity: 1;
+            transform: none;
+        }
     }
 }

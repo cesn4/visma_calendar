@@ -22,6 +22,18 @@ const reducer = (state = initialState, action: Actions): ApplicationState => {
         activeCalendarYear: action.payload,
       };
     }
+    case ActionTypes.setCalendarState: {
+      return {
+        ...state,
+        calendarState: action.payload,
+      };
+    }
+    case ActionTypes.setEventFormState: {
+      return {
+        ...state,
+        eventFormState: action.payload,
+      };
+    }
     case ActionTypes.addRepetitiveEvent: {
       let newArray = state.repetitiveEvents;
       newArray.push(action.payload);

@@ -6,6 +6,7 @@ import { weekdays } from "~/mock/weekdays";
 
 import "./Calendar.scss";
 import Icon from "../Icons";
+import { SetCalendarState } from "~/store/actions";
 
 const Calendar: FunctionComponent = () => {
   const className = "calendar";
@@ -71,6 +72,7 @@ const Calendar: FunctionComponent = () => {
           to={`2020-${monthISO}-${dayISO}`}
           key={index.toString() + "day"}
           className={`${className}__day`}
+          onClick={() => SetCalendarState(false)}
         >
           {day}
         </Link>
