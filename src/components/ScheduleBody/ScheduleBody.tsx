@@ -1,16 +1,16 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import { DateTime } from "luxon";
 
-import { ScheduleProps } from "~/sections/Schedule/Schedule";
+import EventCard from "../EventCard";
+import { RepetetiveEventObject, UniqueEventObject } from "~/store/types/eventTypes";
 
 import "./ScheduleBody.scss";
-import EventCard from "../EventCard";
 
-const ScheduleBody: FunctionComponent<ScheduleProps> = ({
+const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
   date,
   repetitiveEvents,
   uniqueEvents,
-}: ScheduleProps) => {
+}: ScheduleBodyProps) => {
   const className = "schedule-body";
   const activeDate = DateTime.fromISO(date);
   const activeDay = activeDate.day;
@@ -69,5 +69,11 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
     </div>
   );
 };
+
+interface ScheduleBodyProps {
+  repetitiveEvents: Array<RepetetiveEventObject>;
+  uniqueEvents: Array<UniqueEventObject>;
+  date: string;
+}
 
 export default ScheduleBody;

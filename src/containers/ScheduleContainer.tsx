@@ -8,14 +8,12 @@ import {
   UniqueEventObject,
 } from "~/store/types/eventTypes";
 
-const ScheduleContainer: FunctionComponent<
-  ScheduleContainerProps & ScheduleReduxProps
-> = ({
+const ScheduleContainer: FunctionComponent<CombinedScheduleProps> = ({
   date,
   repetitiveEvents,
   uniqueEvents,
   calendarState,
-}: ScheduleContainerProps & ScheduleReduxProps) => {
+}: CombinedScheduleProps) => {
   return (
     <Schedule
       calendarState={calendarState}
@@ -35,6 +33,8 @@ interface ScheduleReduxProps {
   uniqueEvents: Array<UniqueEventObject>;
   calendarState: boolean;
 }
+
+export type CombinedScheduleProps = ScheduleContainerProps & ScheduleReduxProps;
 
 const mapStateToProps = (state: ApplicationState): ScheduleReduxProps => {
   return {

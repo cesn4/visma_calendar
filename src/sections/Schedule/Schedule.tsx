@@ -1,19 +1,16 @@
 import React, { FunctionComponent } from "react";
 import ScheduleBody from "~/components/ScheduleBody";
 import ScheduleTitle from "~/components/ScheduleTitle";
-import {
-  RepetetiveEventObject,
-  UniqueEventObject,
-} from "~/store/types/eventTypes";
+import { CombinedScheduleProps } from "~/containers/ScheduleContainer";
 
 import "./Schedule.scss";
 
-const Schedule: FunctionComponent<ScheduleProps & ReduxCalendarState> = ({
+const Schedule: FunctionComponent<CombinedScheduleProps> = ({
   date,
   repetitiveEvents,
   uniqueEvents,
   calendarState,
-}: ScheduleProps & ReduxCalendarState) => {
+}: CombinedScheduleProps) => {
   const className = "schedule";
   return (
     <div className={className}>
@@ -30,15 +27,4 @@ const Schedule: FunctionComponent<ScheduleProps & ReduxCalendarState> = ({
     </div>
   );
 };
-
-export interface ScheduleProps {
-  date: string;
-  repetitiveEvents: Array<RepetetiveEventObject>;
-  uniqueEvents: Array<UniqueEventObject>;
-}
-
-interface ReduxCalendarState {
-  calendarState: boolean;
-}
-
 export default Schedule;

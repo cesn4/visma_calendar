@@ -9,13 +9,14 @@ import Calendar from "~/components/Calendar";
 import "./Main.scss";
 import { ApplicationState } from "~/store/types/applicationState";
 import { connect } from "react-redux";
+import EventForm from "~/sections/EventForm";
 
 const Main: FunctionComponent<MainReduxProps> = ({
   eventFormState,
   calendarState,
 }: MainReduxProps) => {
-  const { slug } = useParams();
   const className = "main";
+  const { slug } = useParams();
   return (
     <div className={`${className}`}>
       <Container>
@@ -33,6 +34,13 @@ const Main: FunctionComponent<MainReduxProps> = ({
                 })}
               >
                 <Calendar />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className={`${className}__event-form`}>
+                <EventForm />
               </div>
             </Col>
           </Row>
