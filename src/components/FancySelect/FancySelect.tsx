@@ -10,9 +10,9 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   multiple,
 }: FancySelectProps) => {
   const className = "fancy-select";
-  const renderOptions = options.map((value) => {
+  const renderOptions = options.map((value, index) => {
     return (
-      <option className={`${className}__option`} value={value}>
+      <option key={index.toString() + ' options'} className={`${className}__option`} value={value}>
         {value}
       </option>
     );
