@@ -12,6 +12,9 @@
   @include if-desktop {
     padding: 0 60px;
   }
+  @include if-desktop-xl {
+    padding: 0 80px;
+  }
 
   &__smaller-box {
     display: flex;
