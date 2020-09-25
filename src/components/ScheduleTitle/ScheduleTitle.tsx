@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 
 import "./ScheduleTitle.scss";
 import Icon from "../Icons";
-import { SetCalendarState } from "~/store/actions";
+import { SetCalendarState, SetEventFormState } from "~/store/actions";
 
 const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
   date,
@@ -30,7 +30,7 @@ const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
           name="calendar"
           className={`${className}__calendar-icon`}
         />
-        <Icon name="add" />
+        <Icon name="add" onClick={() => SetEventFormState(true)} />
       </div>
     </div>
   );

@@ -39,7 +39,11 @@ const Main: FunctionComponent<MainReduxProps> = ({
           </Row>
           <Row>
             <Col>
-              <div className={`${className}__event-form`}>
+              <div
+                className={classNames(`${className}__event-form`, {
+                  "-active": eventFormState,
+                })}
+              >
                 <EventForm />
               </div>
             </Col>

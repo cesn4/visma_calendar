@@ -5,7 +5,7 @@ export interface RepetetiveEventObject {
   about: string;
   time: string;
   daysToRepeat: Array<string>;
-  repetition?: RepetitionType;
+  repetition?: string;
   resetEveryMonth?: boolean;
   always?: boolean;
 }
