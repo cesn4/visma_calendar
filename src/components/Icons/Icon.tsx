@@ -5,10 +5,12 @@ import SVGCalendar from "./assets/SVGCalendar";
 import SVGAdd from "./assets/SVGAdd";
 
 import "./Icon.scss";
+import SVGLeftArrow from "./assets/SVGLeftArrow";
+import SVGRightArrow from "./assets/SVGRightArrow";
 
 const Icon: FunctionComponent<IconProps> = ({
   className,
-  color = "#FFF4CE",
+  color = "#F9F9F9",
   size = 50,
   name,
 }: IconProps) => {
@@ -19,6 +21,10 @@ const Icon: FunctionComponent<IconProps> = ({
         return <SVGCalendar {...iconProps} />;
       case "add":
         return <SVGAdd {...iconProps} />;
+      case "leftArrow":
+        return <SVGLeftArrow {...iconProps} />;
+      case "rightArrow":
+        return <SVGRightArrow {...iconProps} />;
       default:
         return null;
     }
@@ -35,6 +41,6 @@ interface IconProps {
   name: IconType;
 }
 
-export type IconType = "calendar" | "add";
+export type IconType = "calendar" | "add" | "leftArrow" | "rightArrow";
 
 export default Icon;

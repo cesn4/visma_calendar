@@ -5,6 +5,7 @@ import { Container, Row, Col } from "react-grid-system";
 import ScheduleContainer from "~/containers/ScheduleContainer";
 
 import "./Main.scss";
+import Calendar from "~/components/Calendar";
 
 const Main: FunctionComponent = () => {
   const { slug } = useParams();
@@ -16,6 +17,13 @@ const Main: FunctionComponent = () => {
           <Row>
             <Col>
               <ScheduleContainer date={slug} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <div className={`${className}__calendar`}>
+                <Calendar />
+              </div>
             </Col>
           </Row>
         </div>
