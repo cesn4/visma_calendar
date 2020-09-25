@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { DateTime } from "luxon";
 
 import "./ScheduleTitle.scss";
+import Icon from "../Icons";
 
 const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
   date,
@@ -14,9 +15,15 @@ const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
 
   return (
     <div className={className}>
-      <span className={`${className}__label`}>Events for {month}</span>
-      <span className={`${className}__day`}>{day}</span>
-      <span className={`${className}__label -weekday`}>{weekday}</span>
+      <div className={`${className}__label-box`}>
+        <span className={`${className}__label`}>Events for {month}</span>
+        <span className={`${className}__day`}>{day}</span>
+        <span className={`${className}__label -weekday`}>{weekday}</span>
+      </div>
+      <div className={`${className}__button-box`}>
+        <Icon name="calendar" className={`${className}__calendar`}/>
+        <Icon name="add" />
+      </div>
     </div>
   );
 };
