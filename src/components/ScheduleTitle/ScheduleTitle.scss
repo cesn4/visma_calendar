@@ -5,7 +5,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 60px;
+  padding-left: 40px;
 
   &__label-box {
     display: flex;
@@ -16,25 +16,44 @@
 
   &__label {
     text-transform: uppercase;
+    font-size: $font-size-m;
 
     &.-weekday {
+      margin-top: 10px;
       font-size: $font-size-l;
     }
   }
 
+  &__day-box {
+    margin-top: 10px;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 125px;
+    width: 130px;
+    background-color: color(dark);
+    border-radius: $border-primary;
+  }
+
   &__day {
+    position: absolute;
     font-size: $font-size-xl;
+    color: color(light);
   }
 
   &__button-box {
-    padding: 25px;
+    padding: 0 15px 0 25px;
+    height: 190px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     background-color: color(dark);
-    height: min-content;
-    border-bottom-left-radius: $border-primary;
-    border-top-left-radius: $border-primary;
+    border-bottom-left-radius: $border-secondary;
+    border-top-left-radius: $border-secondary;
   }
 
-  &__calendar {
-      margin-bottom: 50px;
+  &__calendar-icon {
+    margin-bottom: 40px;
   }
 }
