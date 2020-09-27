@@ -2,15 +2,15 @@ import React, { FunctionComponent } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-grid-system";
 import classNames from "classnames";
-
-import ScheduleContainer from "~/containers/ScheduleContainer";
-import Calendar from "~/components/Calendar";
-
-import "./Main.scss";
-import { ApplicationState } from "~/store/types/applicationState";
 import { connect } from "react-redux";
+
+import Calendar from "~/sections/Calendar";
+import { ApplicationState } from "~/store/types/applicationState";
 import EventForm from "~/sections/EventForm";
 import { EventObject } from "~/store/types/eventTypes";
+import Schedule from "~/sections/Schedule";
+
+import "./Main.scss";
 
 const Main: FunctionComponent<MainReduxProps> = ({
   eventFormState,
@@ -25,7 +25,11 @@ const Main: FunctionComponent<MainReduxProps> = ({
         <div className={`${className}__box`}>
           <Row>
             <Col>
-              <ScheduleContainer date={slug} />
+              <Schedule
+                date={slug}
+                events={events}
+                calendarState={calendarState}
+              />
             </Col>
           </Row>
           <Row>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 import { weekdays } from "~/mocks/optionsMocks";
-import Icon from "../Icons";
+import Icon from "../../components/Icons";
 import { SetCalendarState } from "~/store/actions";
 
 import "./Calendar.scss";
@@ -13,28 +13,30 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   activeDate,
 }: CalendarProps) => {
   const className = "calendar";
-  const currentDay = DateTime.local().day;
-  const currentMonth = DateTime.local().month;
-  const currentYear = DateTime.local().year;
+  const currentDate = DateTime.local();
   const activeScheduleDate = DateTime.fromISO(activeDate);
-  const [activeCalendarMonth, setActiveCalendarMonth] = useState(currentMonth);
-  const [activeCalendarYear, setActiveCalendarYear] = useState(currentYear);
-
-  const month = DateTime.local(activeCalendarYear, activeCalendarMonth, 1);
-  const totalDaysNumber = month.daysInMonth;
-  const monthName = month.monthLong;
+  const [activeCalendarMonth, setActiveCalendarMonth] = useState(
+    currentDate.month
+  );
+  const [activeCalendarYear, setActiveCalendarYear] = useState(
+    currentDate.year
+  );
+  const activeMonthBaseInfo = DateTime.local(
+    activeCalendarYear,
+    activeCalendarMonth,
+    1
+  );
 
   // Month start blank days
-  const firstWeekday = month.weekday;
   let startBlankArray: Array<number> = [];
-  const startBlankDayNumber = firstWeekday - 1;
+  const startBlankDayNumber = activeMonthBaseInfo.weekday - 1;
   if (startBlankDayNumber !== 0) {
     startBlankArray = Array.from({ length: startBlankDayNumber }, (_) => 0);
   }
 
   // Month days
   const daysArray: Array<number> = Array.from(
-    { length: totalDaysNumber },
+    { length: activeMonthBaseInfo.daysInMonth },
     (_, i) => i + 1
   );
 
@@ -42,7 +44,7 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const lastWeekday = DateTime.local(
     activeCalendarYear,
     activeCalendarMonth,
-    totalDaysNumber
+    activeMonthBaseInfo.daysInMonth
   ).weekday;
   const endBlankDayNumber = 7 - lastWeekday;
   let endBlankArray: Array<number> = [];
@@ -83,9 +85,9 @@ const Calendar: FunctionComponent<CalendarProps> = ({
           className={classNames(`${className}__day`, {
             "-blank": day === 0,
             "-current":
-              currentMonth === activeCalendarMonth &&
-              currentDay === day &&
-              activeCalendarYear === currentYear,
+              currentDate.month === activeCalendarMonth &&
+              currentDate.day === day &&
+              activeCalendarYear === currentDate.year,
             "-active":
               activeCalendarMonth === activeScheduleDate.month &&
               day === activeScheduleDate.day &&
@@ -125,8 +127,12 @@ const Calendar: FunctionComponent<CalendarProps> = ({
         >
           <Icon name="leftArrow" size={30} />
         </button>
-        <span className={`${className}__label`}>{monthName}</span>
-        <span className={`${className}__label`}>{month.year}</span>
+        <span className={`${className}__label`}>
+          {activeMonthBaseInfo.monthLong}
+        </span>
+        <span className={`${className}__label`}>
+          {activeMonthBaseInfo.year}
+        </span>
         <button
           className={`${className}__button`}
           onClick={() =>

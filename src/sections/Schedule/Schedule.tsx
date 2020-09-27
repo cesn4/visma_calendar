@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from "react";
 import ScheduleBody from "~/components/ScheduleBody";
 import ScheduleTitle from "~/components/ScheduleTitle";
-import { CombinedScheduleProps } from "~/containers/ScheduleContainer";
+import { EventObject } from "~/store/types/eventTypes";
 
 import "./Schedule.scss";
 
-const Schedule: FunctionComponent<CombinedScheduleProps> = ({
+const Schedule: FunctionComponent<ScheduleProps> = ({
   date,
   events,
   calendarState,
-}: CombinedScheduleProps) => {
+}: ScheduleProps) => {
   const className = "schedule";
   return (
     <div className={className}>
@@ -22,4 +22,10 @@ const Schedule: FunctionComponent<CombinedScheduleProps> = ({
     </div>
   );
 };
+
+interface ScheduleProps {
+  date: string;
+  events: Array<EventObject>;
+  calendarState: boolean;
+}
 export default Schedule;
