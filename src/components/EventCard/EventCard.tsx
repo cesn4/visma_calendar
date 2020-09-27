@@ -1,17 +1,20 @@
 import React, { FunctionComponent } from "react";
-import {
-  RepetetiveEventObject,
-  UniqueEventObject,
-} from "~/store/types/eventTypes";
+import { EventObject } from "~/store/types/eventTypes";
+import classNames from "classnames";
 
 import "./EventCard.scss";
 
 const EventCard: FunctionComponent<EventCardProps> = ({
   data,
+  isFirst = false,
+  isLast = false,
 }: EventCardProps) => {
   const className = "event-card";
   return (
-    <div className={className}>
+    <div className={classNames(`${className}`, {
+      "-first": isFirst,
+      "-last": isLast,
+    })}>
       <div className={`${className}__title-box`}>
         <span className={`${className}__time`}>{data.time}</span>
         <span className={`${className}__title`}>{data.title}</span>
@@ -22,7 +25,9 @@ const EventCard: FunctionComponent<EventCardProps> = ({
 };
 
 interface EventCardProps {
-  data: UniqueEventObject | RepetetiveEventObject;
+  data: EventObject;
+  isFirst?: boolean;
+  isLast?: boolean;
 }
 
 export default EventCard;

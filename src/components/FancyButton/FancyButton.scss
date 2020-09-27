@@ -1,0 +1,17 @@
+.fancy-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border-radius-primary;
+    padding: 0 $spacing-s;
+    height: 60px;
+    width: 130px;
+    font-size: $font-size-m;
+    color: color(light);
+    background-color: color(dark);
+    box-shadow: $shadow-full;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

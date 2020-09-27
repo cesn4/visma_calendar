@@ -1,0 +1,119 @@
+.calendar {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: color(light);
+
+  &__date-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: $font-size-m;
+    padding: $spacing-xs $spacing-s;
+    border-bottom: 1px solid color(light);
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    background-color: color(dark);
+    color: color(light);
+
+    @include if-tablet {
+      font-size: $font-size-ml;
+      padding: $spacing-m $spacing-s;
+    }
+
+    @include if-desktop {
+      padding: $spacing-m $spacing-l;
+    }
+
+    @include if-desktop-xl {
+      font-size: $font-size-l;
+      padding: $spacing-m $spacing-xl;
+    }
+  }
+
+  &__calendar-box {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__column {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: $spacing-m;
+  }
+
+  &__weekday {
+    width: 100%;
+    font-size: $font-size-sm;
+    color: color(light);
+    display: flex;
+    justify-content: center;
+    padding: $spacing-xs 0;
+    background-color: color(dark);
+
+    @include if-tablet {
+      font-size: $font-size-m;
+    }
+  }
+
+
+  &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 45px;
+    font-size: $font-size-sm;
+    text-decoration: none;
+    color: color(dark);
+    border-radius: 15px;
+
+    &.-blank {
+      visibility: hidden;
+    }
+
+    &.-current {
+      background-color: color(dark);
+      color: color(light);
+      box-shadow: $shadow-full;
+    }
+
+    &.-active {
+      border: 1px solid color(dark);
+      box-shadow: $shadow-full;
+    }
+
+    @include if-tablet {
+      font-size: $font-size-ml;
+      height: 60px;
+      width: 60px;
+    }
+
+    @include if-desktop-xl {
+      font-size: $font-size-l;
+      height: 100px;
+      width: 100px;
+    }
+  }
+
+  &__button {
+    display: flex;
+    border: none;
+    background-color: color(dark);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

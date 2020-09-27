@@ -1,0 +1,12 @@
+$cta-transition-duration: 0.3s;
+
+@function cta-transition($_list, $_duration: $cta-transition-duration) {
+  $_new-list: ();
+  @each $_item in $_list {
+    @if ($_item == 'all') {
+      @warn '"all" should not be used with cta-transition';
+    }
+    $_new-list: append($_new-list, $_item $_duration ease, comma);
+  }
+  @return $_new-list;
+}

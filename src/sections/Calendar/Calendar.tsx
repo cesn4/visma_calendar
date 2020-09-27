@@ -1,44 +1,56 @@
 import React, { FunctionComponent, useState } from "react";
 import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
+import classNames from "classnames";
 
-import { weekdays } from "~/mock/weekdays";
+import { weekdays } from "~/mocks/optionsMocks";
+import Icon from "../../components/Icons";
+import { SetCalendarState } from "~/store/actions";
 
 import "./Calendar.scss";
-import Icon from "../Icons";
 
-const Calendar: FunctionComponent = () => {
+const Calendar: FunctionComponent<CalendarProps> = ({
+  activeDate,
+}: CalendarProps) => {
   const className = "calendar";
-  const currentMonth = DateTime.local().month;
-  const [activeMonth, setActiveMonth] = useState(currentMonth);
-
-  const month = DateTime.local(2020, activeMonth, 1);
-  const totalDaysNumber = month.daysInMonth;
-  const monthName = month.monthLong;
+  const currentDate = DateTime.local();
+  const activeScheduleDate = DateTime.fromISO(activeDate);
+  const [activeCalendarMonth, setActiveCalendarMonth] = useState(
+    currentDate.month
+  );
+  const [activeCalendarYear, setActiveCalendarYear] = useState(
+    currentDate.year
+  );
+  const activeMonthBaseInfo = DateTime.local(
+    activeCalendarYear,
+    activeCalendarMonth,
+    1
+  );
 
   // Month start blank days
-  const firstWeekday = month.weekday;
   let startBlankArray: Array<number> = [];
-  const startBlankDayNumber = firstWeekday - 1;
+  const startBlankDayNumber = activeMonthBaseInfo.weekday - 1;
   if (startBlankDayNumber !== 0) {
     startBlankArray = Array.from({ length: startBlankDayNumber }, (_) => 0);
   }
 
   // Month days
   const daysArray: Array<number> = Array.from(
-    { length: totalDaysNumber },
+    { length: activeMonthBaseInfo.daysInMonth },
     (_, i) => i + 1
   );
 
   //Month end blank days
-  const lastWeekday = DateTime.local(2020, activeMonth, totalDaysNumber)
-    .weekday;
+  const lastWeekday = DateTime.local(
+    activeCalendarYear,
+    activeCalendarMonth,
+    activeMonthBaseInfo.daysInMonth
+  ).weekday;
   const endBlankDayNumber = 7 - lastWeekday;
   let endBlankArray: Array<number> = [];
   if (endBlankDayNumber !== 0) {
     endBlankArray = Array.from({ length: endBlankDayNumber }, (_) => 0);
   }
-
   const finalDaysArray = [...startBlankArray, ...daysArray, ...endBlankArray];
 
   const daysFillter: Function = (day: number) => {
@@ -58,7 +70,7 @@ const Calendar: FunctionComponent = () => {
   const renderCalendarContent = weekdays.map((weekday, index) => {
     const days = daysFillter(index + 1);
     const renderDays = days.map((day: number, index: number) => {
-      const monthISO = activeMonth.toLocaleString("en-US", {
+      const monthISO = activeCalendarMonth.toLocaleString("en-US", {
         minimumIntegerDigits: 2,
         useGrouping: false,
       });
@@ -68,9 +80,20 @@ const Calendar: FunctionComponent = () => {
       });
       return (
         <Link
-          to={`2020-${monthISO}-${dayISO}`}
+          to={`${activeCalendarYear}-${monthISO}-${dayISO}`}
           key={index.toString() + "day"}
-          className={`${className}__day`}
+          className={classNames(`${className}__day`, {
+            "-blank": day === 0,
+            "-current":
+              currentDate.month === activeCalendarMonth &&
+              currentDate.day === day &&
+              activeCalendarYear === currentDate.year,
+            "-active":
+              activeCalendarMonth === activeScheduleDate.month &&
+              day === activeScheduleDate.day &&
+              activeCalendarYear === activeScheduleDate.year,
+          })}
+          onClick={() => SetCalendarState(false)}
         >
           {day}
         </Link>
@@ -93,15 +116,33 @@ const Calendar: FunctionComponent = () => {
       <div className={`${className}__date-box`}>
         <button
           className={`${className}__button`}
-          onClick={() => setActiveMonth((e) => e - 1)}
+          onClick={() =>
+            setActiveCalendarMonth((e) => {
+              if (e === 1) {
+                setActiveCalendarYear((e) => e - 1);
+                return 12;
+              } else return e - 1;
+            })
+          }
         >
           <Icon name="leftArrow" size={30} />
         </button>
-        <span className={`${className}__label`}>{monthName}</span>
-        <span className={`${className}__label`}>{month.year}</span>
+        <span className={`${className}__label`}>
+          {activeMonthBaseInfo.monthLong}
+        </span>
+        <span className={`${className}__label`}>
+          {activeMonthBaseInfo.year}
+        </span>
         <button
           className={`${className}__button`}
-          onClick={() => setActiveMonth((e) => e + 1)}
+          onClick={() =>
+            setActiveCalendarMonth((e) => {
+              if (e === 12) {
+                setActiveCalendarYear((e) => e + 1);
+                return 1;
+              } else return e + 1;
+            })
+          }
         >
           <Icon name="rightArrow" size={30} />
         </button>
@@ -112,5 +153,9 @@ const Calendar: FunctionComponent = () => {
     </div>
   );
 };
+
+interface CalendarProps {
+  activeDate: string;
+}
 
 export default Calendar;

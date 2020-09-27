@@ -1,23 +1,21 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import { DateTime } from "luxon";
 
-import { ScheduleProps } from "~/sections/Schedule/Schedule";
+import EventCard from "../EventCard";
+import { EventObject } from "~/store/types/eventTypes";
 
 import "./ScheduleBody.scss";
-import EventCard from "../EventCard";
 
-const ScheduleBody: FunctionComponent<ScheduleProps> = ({
+const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
   date,
-  repetitiveEvents,
-  uniqueEvents,
-}: ScheduleProps) => {
+  events,
+}: ScheduleBodyProps) => {
   const className = "schedule-body";
   const activeDate = DateTime.fromISO(date);
   const activeDay = activeDate.day;
   const firstWeekday = DateTime.local(activeDate.year, activeDate.month, 1)
     .weekday;
   const baseDay = 1 + activeDate.weekday - firstWeekday;
-
   const evenWeekDaysBoolean =
     activeDay === baseDay + 7 ||
     activeDay === baseDay + 21 ||
@@ -27,27 +25,22 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
     activeDay === baseDay + 14 ||
     activeDay === baseDay + 28;
 
-  // Rendering Event witch was created for one time only
-  const renderUniqueEvents = uniqueEvents.map(
-    (obj, index): ReactNode => {
-      if (obj.date === date) {
-        return (
-          <EventCard key={index.toString() + " unique event"} data={obj} />
-        );
-      } else return null;
-    }
-  );
-
   // rendering repetitive events for infinity period of time
-  const renderRepetitiveEvents = repetitiveEvents.map(
+  const sortedEvents = events.sort((a: EventObject, b: EventObject) => {
+    return a.priority - b.priority;
+  });
+  const renderEvents = sortedEvents.map(
     (obj, index): ReactNode => {
-      if (obj.daysToRepeat.includes(activeDate.weekdayShort) && obj.always) {
+      if (
+        obj.daysToRepeat?.includes(activeDate.weekdayShort) &&
+        obj.repetition === "Always"
+      ) {
         return (
           <EventCard key={index.toString() + " repetitive event"} data={obj} />
         );
       } else if (
-        obj.daysToRepeat.includes(activeDate.weekdayShort) &&
-        !obj.always &&
+        obj.daysToRepeat?.includes(activeDate.weekdayShort) &&
+        obj.repetition === "Every two weeks" &&
         (firstWeekday > activeDate.weekday
           ? evenWeekDaysBoolean
           : oddWeekDaysBoolean)
@@ -58,16 +51,20 @@ const ScheduleBody: FunctionComponent<ScheduleProps> = ({
             data={obj}
           />
         );
+      } else if (obj.repetition === "Once" && obj.date === date) {
+        return (
+          <EventCard key={index.toString() + " unique event"} data={obj} />
+        );
       } else return null;
     }
   );
 
-  return (
-    <div className={className}>
-      {renderRepetitiveEvents}
-      {renderUniqueEvents}
-    </div>
-  );
+  return <div className={className}>{renderEvents}</div>;
 };
+
+interface ScheduleBodyProps {
+  events: Array<EventObject>;
+  date: string;
+}
 
 export default ScheduleBody;

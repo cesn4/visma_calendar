@@ -1,12 +1,61 @@
 .main {
-    height: 100%;
-    width: 100%;
-    min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
 
-    &__calendar {
-        position: fixed;
-        bottom: 0;
-        height: 60vh;
-        width: 100vw;
+  &__calendar {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    bottom: 0;
+    height: 60vh;
+    width: 100vw;
+    transform: translateY(10%);
+    transition: cta-transition([visibility opacity transform]);
+
+    &.-active {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
     }
+
+    @include if-tablet {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+      height: 100vh;
+      width: 60vw;
+      left: 0;
+    }
+
+    @include if-desktop {
+      width: 65vw;
+    }
+  }
+
+  &__event-form {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    right: 0;
+    transform: translateX(10%);
+    transition: cta-transition([visibility opacity transform]);
+
+    @include if-tablet {
+      width: 40vw;
+    }
+
+    @include if-desktop {
+      width: 35vw;
+    }
+
+    &.-active {
+      visibility: visible;
+      opacity: 1;
+      transform: none;
+    }
+  }
 }

@@ -5,7 +5,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 40px;
+  padding-left: $spacing-md;
+
+  @include if-tablet {
+    justify-content: center;
+    padding: 0;
+  }
 
   &__label-box {
     display: flex;
@@ -16,44 +21,71 @@
 
   &__label {
     text-transform: uppercase;
-    font-size: $font-size-m;
+    font-size: $font-size-sm;
+    font-weight: bold;
+
+    @include if-desktop-xl {
+      font-size: $font-size-m;
+    }
 
     &.-weekday {
-      margin-top: 10px;
-      font-size: $font-size-l;
+      margin-top: $spacing-xs;
+      font-size: $font-size-m;
+
+      @include if-desktop-xl {
+        font-size: $font-size-ml;
+      }
     }
   }
 
-  &__day-box {
-    margin-top: 10px;
+  &__day {
+    margin-top: $spacing-xs;
     display: flex;
-    position: relative;
     justify-content: center;
-    height: 125px;
+    align-items: center;
+    height: 130px;
     width: 130px;
     background-color: color(dark);
-    border-radius: $border-primary;
-  }
-
-  &__day {
-    position: absolute;
+    border-radius: $border-radius-primary;
     font-size: $font-size-xl;
     color: color(light);
+
+    @include if-desktop-xl {
+      height: 180px;
+      width: 180px;
+      font-size: $font-size-xxl;
+
+    }
   }
 
   &__button-box {
-    padding: 0 15px 0 25px;
+    padding: 0 15px 0 $spacing-sm;
     height: 190px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: color(dark);
-    border-bottom-left-radius: $border-secondary;
-    border-top-left-radius: $border-secondary;
+    border-bottom-left-radius: $border-radius-secondary;
+    border-top-left-radius: $border-radius-secondary;
+    box-shadow: $shadow-full;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    @include if-tablet {
+      height: fit-content;
+      padding: $spacing-s;
+      border-radius: $border-radius-primary;
+    }
   }
 
   &__calendar-icon {
-    margin-bottom: 40px;
+    margin-bottom: $spacing-md;
+
+    @include if-tablet {
+      display: none;
+    }
   }
 }

@@ -3,9 +3,11 @@ import { DateTime } from "luxon";
 
 import "./ScheduleTitle.scss";
 import Icon from "../Icons";
+import { SetCalendarState, SetEventFormState } from "~/store/actions";
 
 const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
   date,
+  calendarState,
 }: ScheduleTitleProps) => {
   const className = "schedule-title";
   const activeDate = DateTime.fromISO(date);
@@ -17,14 +19,17 @@ const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
     <div className={className}>
       <div className={`${className}__label-box`}>
         <span className={`${className}__label`}>Events for {month}</span>
-        <div className={`${className}__day-box`}>
           <span className={`${className}__day`}>{day}</span>
-        </div>
         <span className={`${className}__label -weekday`}>{weekday}</span>
       </div>
       <div className={`${className}__button-box`}>
-        <Icon name="calendar" className={`${className}__calendar-icon`} />
-        <Icon name="add" />
+        <div className={`${className}__calendar-icon`}>
+          <Icon
+            onClick={() => SetCalendarState(!calendarState)}
+            name="calendar"
+          />
+        </div>
+        <Icon name="add" onClick={() => SetEventFormState(true)} />
       </div>
     </div>
   );
@@ -32,6 +37,7 @@ const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
 
 interface ScheduleTitleProps {
   date: string;
+  calendarState: boolean;
 }
 
 export default ScheduleTitle;

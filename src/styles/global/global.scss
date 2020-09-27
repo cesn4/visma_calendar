@@ -9,3 +9,7 @@ body {
     font-size: $font-size-s;
     color: color(dark);
 }
+
+input:focus {
+    outline:none;
+}

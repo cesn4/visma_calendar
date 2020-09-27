@@ -1,9 +1,8 @@
-import { RepetetiveEventObject, UniqueEventObject } from "./eventTypes";
+import { EventObject } from "./eventTypes";
 
 export interface ApplicationState {
   currentDate: string;
-  activeCalendarMonth: number;
-  activeCalendarYear: number;
-  repetitiveEvents: Array<RepetetiveEventObject>;
-  uniqueEvents: Array<UniqueEventObject>;
+  events: Array<EventObject>;
+  calendarState: boolean;
+  eventFormState: boolean;
 }
