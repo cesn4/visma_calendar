@@ -26,7 +26,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     repetition: "Once",
     daysToRepeat: [""],
   });
-
+  console.log(eventInformation);
   const handleChange = (e: any) => {
     setEventInformation({
       ...eventInformation,
@@ -37,6 +37,22 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   const saveHandler = () => {
     AddEvent([...events, eventInformation]);
     SetEventFormState(false);
+  };
+
+  const handelMultiSelect = (e: any) => {
+    if (!eventInformation.daysToRepeat.includes(e.target.value)) {
+      setEventInformation({
+        ...eventInformation,
+        daysToRepeat: [...eventInformation.daysToRepeat, e.target.value],
+      });
+    } else {
+      setEventInformation({
+        ...eventInformation,
+        daysToRepeat: eventInformation.daysToRepeat.filter(
+          (string) => string !== e.target.value
+        ),
+      });
+    }
   };
 
   return (
@@ -77,7 +93,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
           <span className={`${className}__label`}>Days to repeat</span>
           <FancySelect
             multiple
-            handleChange={handleChange}
+            handleChange={handelMultiSelect}
             name="Days to repeat"
             id="daysToRepeat"
             options={weekdays}

@@ -13,7 +13,6 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   const renderOptions = options.map((value, index) => {
     return (
       <option
-        onChange={() => console.log("hello")}
         key={index.toString() + " options"}
         className={`${className}__option`}
         value={value}
@@ -25,6 +24,7 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   return (
     <div className={`${className}`}>
       <select
+      onSelect={() => console.log('hello')}
         multiple={multiple}
         onChange={handleChange}
         className={`${className}__input`}
