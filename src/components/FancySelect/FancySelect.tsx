@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import Select from 'react-select'
+import Select from "react-select";
 
 import "./FancySelect.scss";
 
@@ -60,13 +60,13 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
     singleValue: (provided: any) => ({
       ...provided,
       fontFamily: "monospace",
-      fontSize: "2rem"
+      fontSize: "2rem",
     }),
   };
   return (
     <div className={className}>
       <Select
-        closeMenuOnSelect={false}
+        closeMenuOnSelect={multi ? false : true}
         isMulti={multi}
         styles={customStyles}
         options={options}

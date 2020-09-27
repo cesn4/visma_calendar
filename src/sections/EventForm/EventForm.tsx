@@ -81,7 +81,10 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       />
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Repetition</span>
-        <FancySelect onChange={() => console.log()} options={repetitionOptions} />
+        <FancySelect
+          onChange={() => console.log()}
+          options={repetitionOptions}
+        />
       </div>
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Time</span>
