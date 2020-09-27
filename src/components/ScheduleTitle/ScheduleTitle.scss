@@ -28,10 +28,10 @@
     }
 
     &.-weekday {
-      margin-top: 10px;
+      margin-top: $spacing-xs;
 
       @include if-desktop {
-        font-size: $font-size-mm;
+        font-size: $font-size-m;
       }
 
       @include if-desktop-xl {
@@ -41,14 +41,14 @@
   }
 
   &__day {
-    margin-top: 10px;
+    margin-top: $spacing-xs;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 130px;
     width: 130px;
     background-color: color(dark);
-    border-radius: $border-primary;
+    border-radius: $border-radius-primary;
     font-size: $font-size-xl;
     color: color(light);
 
@@ -68,8 +68,8 @@
     align-items: center;
     justify-content: center;
     background-color: color(dark);
-    border-bottom-left-radius: $border-secondary;
-    border-top-left-radius: $border-secondary;
+    border-bottom-left-radius: $border-radius-secondary;
+    border-top-left-radius: $border-radius-secondary;
     box-shadow: $shadow-full;
 
     &:hover {
@@ -79,7 +79,7 @@
     @include if-tablet {
       height: fit-content;
       padding: 20px;
-      border-radius: $border-primary;
+      border-radius: $border-radius-primary;
     }
   }
 

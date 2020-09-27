@@ -9,10 +9,10 @@
   overflow: hidden;
 
   &.-first {
-    border-top-left-radius: $border-primary;
+    border-top-left-radius: $border-radius-primary;
   }
   &.-last {
-    border-bottom-left-radius: $border-primary;
+    border-bottom-left-radius: $border-radius-primary;
   }
 
   @include if-tablet {

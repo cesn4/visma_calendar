@@ -11,7 +11,7 @@
     flex-direction: row;
     align-items: center;
     font-size: $font-size-m;
-    padding: 10px 20px;
+    padding: $spacing-xs 20px;
     border-bottom: 1px solid color(light);
     align-items: center;
     justify-content: space-between;
@@ -63,7 +63,7 @@
     color: color(light);
     display: flex;
     justify-content: center;
-    padding: 10px 0;
+    padding: $spacing-xs 0;
     background-color: color(dark);
 
     @include if-tablet {
