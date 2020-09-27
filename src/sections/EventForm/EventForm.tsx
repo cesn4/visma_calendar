@@ -71,7 +71,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
         <span className={`${className}__label`}>Time</span>
         <FancyInput handleChange={handleChange} type="time" id="time" />
       </div>
-      {eventInformation.repetition !== "Once" ? (
+      {eventInformation.repetition === "Once" ? (
         <div className={`${className}__smaller-box`}>
           <span className={`${className}__label`}>Date</span>
           <FancyInput handleChange={handleChange} type="date" id="date" />
