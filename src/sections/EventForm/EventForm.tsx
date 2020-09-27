@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState } from "react";
 import FancyButton from "~/components/FancyButton";
+import Select from "react-select";
 
 import FancyInput from "~/components/FancyInput";
 import FancySelect from "~/components/FancySelect";
@@ -17,6 +18,16 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     "Once",
     "Always",
     "Every two weeks",
+  ];
+
+  const weekdayOptions = [
+    { value: "Mon", label: "Mon" },
+    { value: "Tue", label: "Tue" },
+    { value: "Wed", label: "Wed" },
+    { value: "Thu", label: "Thu" },
+    { value: "Fri", label: "Fri" },
+    { value: "Sat", label: "Sat" },
+    { value: "Sun", label: "Sun" },
   ];
   const [eventInformation, setEventInformation] = useState({
     title: "",
@@ -55,6 +66,48 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     }
   };
 
+  const customStyles = {
+    menu: (provided: any, state: any) => ({
+      ...provided,
+      border: "1px solid #2d2e31",
+      width: state.selectProps.width,
+      color: state.selectProps.menuColor,
+    }),
+    control: (provided: any, state: any) => ({
+      ...provided,
+      border: "none",
+      height: "78.750px",
+      backgroundColor: "#F9F9F9",
+      outline: "none",
+    }),
+    placeholder: (provided: any, state: any) => ({
+      ...provided,
+      color: "#2d2e31",
+    }),
+    multiValue: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: "#2d2e31",
+      color: "#F9F9F9",
+    }),
+    multiValueLabel: (provided: any, state: any) => ({
+      ...provided,
+      color: "#F9F9F9",
+      paddingBottom: "0",
+    }),
+    dropdownIndicator: (provided: any, state: any) => ({
+      ...provided,
+      color: "#2d2e31",
+    }),
+    indicatorSeparator: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: "#2d2e31",
+    }),
+    clearIndicator: (provided: any, state: any) => ({
+      ...provided,
+      color: "#2d2e31",
+    }),
+  };
+
   return (
     <div className={className}>
       <FancyInput
@@ -83,7 +136,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
         <span className={`${className}__label`}>Time</span>
         <FancyInput handleChange={handleChange} type="time" id="time" />
       </div>
-      {eventInformation.repetition === "Once" ? (
+      {eventInformation.repetition !== "Once" ? (
         <div className={`${className}__smaller-box`}>
           <span className={`${className}__label`}>Date</span>
           <FancyInput handleChange={handleChange} type="date" id="date" />
@@ -91,12 +144,24 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       ) : (
         <div className={`${className}__smaller-box`}>
           <span className={`${className}__label`}>Days to repeat</span>
-          <FancySelect
-            multiple
-            handleChange={handelMultiSelect}
-            name="Days to repeat"
-            id="daysToRepeat"
-            options={weekdays}
+          <div className={`${className}__select`}></div>
+          <Select
+            closeMenuOnSelect={false}
+            isMulti
+            styles={customStyles}
+            options={weekdayOptions}
+            theme={(theme) => ({
+              ...theme,
+              // borderRadius: 0,
+              colors: {
+                ...theme.colors,
+                primary: "#2d2e31",
+                neutral40: "#2d2e31",
+                neutral30: "#2d2e31",
+                neutral20: "#2d2e31",
+                neutral50: "#2d2e31",
+              },
+            })}
           />
         </div>
       )}

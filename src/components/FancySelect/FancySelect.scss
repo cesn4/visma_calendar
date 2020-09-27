@@ -19,4 +19,14 @@
       color: color(dark);
     }
   }
+
+  &__option {
+    background-color: color(light);
+    color: color(dark);
+
+    &.-active {
+      background-color: color(dark);
+      color: color(light);
+    }
+  }
 }

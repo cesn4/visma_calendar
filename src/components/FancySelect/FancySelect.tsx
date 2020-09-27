@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
+import classNames from "classnames";
 
 import "./FancySelect.scss";
+import { SetEventFormState } from "~/store/actions";
 
 const FancySelect: FunctionComponent<FancySelectProps> = ({
   name,
@@ -8,13 +10,21 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   options,
   handleChange,
   multiple,
+  activeDays,
 }: FancySelectProps) => {
   const className = "fancy-select";
   const renderOptions = options.map((value, index) => {
+    let isActive = false;
+    if (activeDays?.includes(value)) {
+      isActive = true;
+    }
     return (
       <option
+        onClick={() => SetEventFormState(false)}
         key={index.toString() + " options"}
-        className={`${className}__option`}
+        className={classNames(`${className}__option`, {
+          "-active": isActive,
+        })}
         value={value}
       >
         {value}
@@ -24,7 +34,6 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   return (
     <div className={`${className}`}>
       <select
-      onSelect={() => console.log('hello')}
         multiple={multiple}
         onChange={handleChange}
         className={`${className}__input`}
@@ -43,6 +52,7 @@ interface FancySelectProps {
   options: Array<string>;
   handleChange: any;
   multiple?: boolean;
+  activeDays?: Array<string>;
 }
 
 export default FancySelect;
