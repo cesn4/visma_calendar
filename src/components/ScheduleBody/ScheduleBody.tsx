@@ -16,7 +16,6 @@ const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
   const firstWeekday = DateTime.local(activeDate.year, activeDate.month, 1)
     .weekday;
   const baseDay = 1 + activeDate.weekday - firstWeekday;
-
   const evenWeekDaysBoolean =
     activeDay === baseDay + 7 ||
     activeDay === baseDay + 21 ||
@@ -27,7 +26,10 @@ const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
     activeDay === baseDay + 28;
 
   // rendering repetitive events for infinity period of time
-  const renderEvents = events.map(
+  const sortedEvents = events.sort((a: EventObject, b: EventObject) => {
+    return a.priority - b.priority;
+  });
+  const renderEvents = sortedEvents.map(
     (obj, index): ReactNode => {
       if (
         obj.daysToRepeat?.includes(activeDate.weekdayShort) &&

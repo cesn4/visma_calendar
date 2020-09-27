@@ -44,7 +44,6 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   if (endBlankDayNumber !== 0) {
     endBlankArray = Array.from({ length: endBlankDayNumber }, (_) => 0);
   }
-
   const finalDaysArray = [...startBlankArray, ...daysArray, ...endBlankArray];
 
   const daysFillter: Function = (day: number) => {

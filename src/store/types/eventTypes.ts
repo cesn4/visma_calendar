@@ -7,4 +7,5 @@ export interface EventObject {
   daysToRepeat?: Array<string>;
   repetition?: string;
   date?: string;
+  priority: number;
 }

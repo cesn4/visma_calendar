@@ -1,7 +1,7 @@
 .schedule-body {
   display: flex;
   flex-direction: column;
-  border-top-left-radius: $border-primary;
-  border-bottom-left-radius: $border-primary;
   overflow: hidden;
+  border-bottom-left-radius: $border-primary;
+  border-top-left-radius: $border-primary;
 }

@@ -18,6 +18,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     about: "",
     time: "",
     date: "",
+    priority: 0,
     repetition: "Once",
     daysToRepeat: [""],
   });
@@ -26,6 +27,14 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     setEventInformation({
       ...eventInformation,
       [e.target.id]: e.target.value,
+    });
+  };
+  const timeHandler = (e: any) => {
+    const priority = parseInt(e.target.value.replace(":", ""));
+    setEventInformation({
+      ...eventInformation,
+      time: e.target.value,
+      priority: priority,
     });
   };
 
@@ -73,7 +82,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       </div>
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Time</span>
-        <FancyInput handleChange={handleChange} type="time" id="time" />
+        <FancyInput handleChange={timeHandler} type="time" id="time" />
       </div>
       {eventInformation.repetition === "Once" ? (
         <div className={`${className}__smaller-box`}>
