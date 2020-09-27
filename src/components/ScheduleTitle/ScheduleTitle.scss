@@ -5,7 +5,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 40px;
+  padding-left: $spacing-md;
 
   @include if-tablet {
     justify-content: center;
@@ -22,6 +22,7 @@
   &__label {
     text-transform: uppercase;
     font-size: $font-size-sm;
+    font-weight: bold;
 
     @include if-desktop-xl {
       font-size: $font-size-m;
@@ -29,10 +30,7 @@
 
     &.-weekday {
       margin-top: $spacing-xs;
-
-      @include if-desktop {
-        font-size: $font-size-m;
-      }
+      font-size: $font-size-m;
 
       @include if-desktop-xl {
         font-size: $font-size-ml;
@@ -61,7 +59,7 @@
   }
 
   &__button-box {
-    padding: 0 15px 0 25px;
+    padding: 0 15px 0 $spacing-sm;
     height: 190px;
     display: flex;
     flex-direction: column;
@@ -78,13 +76,13 @@
 
     @include if-tablet {
       height: fit-content;
-      padding: 20px;
+      padding: $spacing-s;
       border-radius: $border-radius-primary;
     }
   }
 
   &__calendar-icon {
-    margin-bottom: 40px;
+    margin-bottom: $spacing-md;
 
     @include if-tablet {
       display: none;

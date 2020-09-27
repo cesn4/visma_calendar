@@ -11,7 +11,7 @@
     flex-direction: row;
     align-items: center;
     font-size: $font-size-m;
-    padding: $spacing-xs 20px;
+    padding: $spacing-xs $spacing-s;
     border-bottom: 1px solid color(light);
     align-items: center;
     justify-content: space-between;
@@ -21,21 +21,17 @@
 
     @include if-tablet {
       font-size: $font-size-ml;
-      padding: 30px 20px;
+      padding: $spacing-m $spacing-s;
     }
 
     @include if-desktop {
-      padding: 30px 50px;
+      padding: $spacing-m $spacing-l;
     }
 
     @include if-desktop-xl {
       font-size: $font-size-l;
-      padding: 30px 70px;
+      padding: $spacing-m $spacing-xl;
     }
-  }
-
-  &__label {
-    margin-top: 5px;
   }
 
   &__calendar-box {
@@ -54,7 +50,7 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    padding-bottom: 30px;
+    padding-bottom: $spacing-m;
   }
 
   &__weekday {
@@ -100,8 +96,8 @@
 
     @include if-tablet {
       font-size: $font-size-ml;
-      height: 70px;
-      width: 70px;
+      height: $spacing-xl;
+      width: $spacing-xl;
     }
 
     @include if-desktop-xl {

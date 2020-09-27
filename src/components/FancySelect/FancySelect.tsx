@@ -39,7 +39,6 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
     multiValueLabel: (provided: any) => ({
       ...provided,
       color: "#F9F9F9",
-      paddingBottom: "0",
     }),
     dropdownIndicator: (provided: any) => ({
       ...provided,

@@ -12,6 +12,7 @@
 
       &::placeholder {
         font-size: $font-size-sm;
+        font-weight: bold;
       }
     }
   }
@@ -28,7 +29,7 @@
 
     &::placeholder {
       font-family: $font-family-primary;
-      font-size: $font-size-m;
+      font-size: $font-size-sm;
       color: color(dark);
       background-color: color(light);
     }

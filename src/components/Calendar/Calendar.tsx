@@ -68,8 +68,6 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const renderCalendarContent = weekdays.map((weekday, index) => {
     const days = daysFillter(index + 1);
     const renderDays = days.map((day: number, index: number) => {
-      let isCurrent = false;
-      let isActive = false;
       const monthISO = activeCalendarMonth.toLocaleString("en-US", {
         minimumIntegerDigits: 2,
         useGrouping: false,
@@ -78,28 +76,20 @@ const Calendar: FunctionComponent<CalendarProps> = ({
         minimumIntegerDigits: 2,
         useGrouping: false,
       });
-      if (
-        currentMonth === activeCalendarMonth &&
-        currentDay === day &&
-        activeCalendarYear === currentYear
-      ) {
-        isCurrent = true;
-      }
-      if (
-        activeCalendarMonth === activeScheduleDate.month &&
-        day === activeScheduleDate.day &&
-        activeCalendarYear === currentYear
-      ) {
-        isActive = true;
-      }
       return (
         <Link
-          to={`2020-${monthISO}-${dayISO}`}
+          to={`${activeCalendarYear}-${monthISO}-${dayISO}`}
           key={index.toString() + "day"}
           className={classNames(`${className}__day`, {
             "-blank": day === 0,
-            "-current": isCurrent,
-            "-active": isActive,
+            "-current":
+              currentMonth === activeCalendarMonth &&
+              currentDay === day &&
+              activeCalendarYear === currentYear,
+            "-active":
+              activeCalendarMonth === activeScheduleDate.month &&
+              day === activeScheduleDate.day &&
+              activeCalendarYear === activeScheduleDate.year,
           })}
           onClick={() => SetCalendarState(false)}
         >

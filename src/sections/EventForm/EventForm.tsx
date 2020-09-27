@@ -70,7 +70,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       <div className={`${className}__bigger-box`}>
         <FancyInput
           handleChange={handleChange}
-          smaller
           type="text"
           id="about"
           placeholder="Add Description"
