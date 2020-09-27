@@ -3,7 +3,7 @@ import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
 
-import { weekdays } from "~/mock/weekdays";
+import { weekdays } from "~/mocks/optionsMocks";
 import Icon from "../Icons";
 import { SetCalendarState } from "~/store/actions";
 

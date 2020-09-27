@@ -1,4 +1,4 @@
-import { eventMock } from '~/mock/eventMock';
+import { eventMock } from '~/mocks/eventMock';
 import { ApplicationState } from './types/applicationState';
 
 const initialState: ApplicationState = {

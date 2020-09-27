@@ -3,6 +3,7 @@ import FancyButton from "~/components/FancyButton";
 
 import FancyInput from "~/components/FancyInput";
 import FancySelect from "~/components/FancySelect";
+import { repetitionOptions, weekdayOptions } from "~/mocks/optionsMocks";
 import { AddEvent, SetEventFormState } from "~/store/actions";
 import { EventObject } from "~/store/types/eventTypes";
 
@@ -12,21 +13,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   events,
 }: EventFormProps) => {
   const className = "event-form";
-  const repetitionOptions = [
-    { value: "Once", label: "Once" },
-    { value: "Always", label: "Always" },
-    { value: "Every two weeks", label: "Every two weeks" },
-  ];
-
-  const weekdayOptions = [
-    { value: "Mon", label: "Mon" },
-    { value: "Tue", label: "Tue" },
-    { value: "Wed", label: "Wed" },
-    { value: "Thu", label: "Thu" },
-    { value: "Fri", label: "Fri" },
-    { value: "Sat", label: "Sat" },
-    { value: "Sun", label: "Sun" },
-  ];
   const [eventInformation, setEventInformation] = useState({
     title: "",
     about: "",
@@ -48,20 +34,18 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     SetEventFormState(false);
   };
 
-  const handelMultiSelect = (e: any) => {
-    if (!eventInformation.daysToRepeat.includes(e.target.value)) {
-      setEventInformation({
-        ...eventInformation,
-        daysToRepeat: [...eventInformation.daysToRepeat, e.target.value],
-      });
-    } else {
-      setEventInformation({
-        ...eventInformation,
-        daysToRepeat: eventInformation.daysToRepeat.filter(
-          (string) => string !== e.target.value
-        ),
-      });
-    }
+  const repetitionHandler = (e: any) => {
+    setEventInformation({
+      ...eventInformation,
+      repetition: e.value,
+    });
+  };
+
+  const weekdayHanlder = (e: Array<WeekdayObject>) => {
+    setEventInformation({
+      ...eventInformation,
+      daysToRepeat: e.map((obj) => obj.value),
+    });
   };
 
   return (
@@ -81,10 +65,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       />
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Repetition</span>
-        <FancySelect
-          onChange={() => console.log()}
-          options={repetitionOptions}
-        />
+        <FancySelect onChange={repetitionHandler} options={repetitionOptions} />
       </div>
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Time</span>
@@ -98,7 +79,11 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       ) : (
         <div className={`${className}__smaller-box`}>
           <span className={`${className}__label`}>Days to repeat</span>
-          <FancySelect multi onChange={() => {}} options={weekdayOptions} />
+          <FancySelect
+            multi
+            onChange={weekdayHanlder}
+            options={weekdayOptions}
+          />
         </div>
       )}
       <div className={`${className}__button-box`}>
@@ -111,6 +96,11 @@ const EventForm: FunctionComponent<EventFormProps> = ({
 
 interface EventFormProps {
   events: Array<EventObject>;
+}
+
+interface WeekdayObject {
+  value: string;
+  label: string;
 }
 
 export default EventForm;

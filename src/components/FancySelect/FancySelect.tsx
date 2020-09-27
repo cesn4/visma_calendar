@@ -67,6 +67,7 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
     <div className={className}>
       <Select
         closeMenuOnSelect={multi ? false : true}
+        onChange={onChange}
         isMulti={multi}
         styles={customStyles}
         options={options}
@@ -89,7 +90,7 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
 
 interface FancySelectProps {
   options: Array<Object>;
-  onChange: VoidFunction;
+  onChange: (e: any) => void;
   multi?: boolean;
 }
 
