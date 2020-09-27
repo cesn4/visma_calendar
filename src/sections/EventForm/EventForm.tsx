@@ -50,19 +50,23 @@ const EventForm: FunctionComponent<EventFormProps> = ({
 
   return (
     <div className={className}>
-      <FancyInput
-        handleChange={handleChange}
-        type="text"
-        id="title"
-        placeholder="Add Title"
-      />
-      <FancyInput
-        handleChange={handleChange}
-        smaller
-        type="text"
-        id="about"
-        placeholder="Add Description"
-      />
+      <div className={`${className}__bigger-box`}>
+        <FancyInput
+          handleChange={handleChange}
+          type="text"
+          id="title"
+          placeholder="Add Title"
+        />
+      </div>
+      <div className={`${className}__bigger-box`}>
+        <FancyInput
+          handleChange={handleChange}
+          smaller
+          type="text"
+          id="about"
+          placeholder="Add Description"
+        />
+      </div>
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Repetition</span>
         <FancySelect onChange={repetitionHandler} options={repetitionOptions} />

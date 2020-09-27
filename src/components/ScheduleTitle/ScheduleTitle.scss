@@ -40,29 +40,23 @@
     }
   }
 
-  &__day-box {
+  &__day {
     margin-top: 10px;
     display: flex;
-    position: relative;
     justify-content: center;
-    height: 125px;
+    align-items: center;
+    height: 130px;
     width: 130px;
     background-color: color(dark);
     border-radius: $border-primary;
-
-    @include if-desktop-xl {
-      height: 175px;
-      width: 195px;
-    }
-  }
-
-  &__day {
-    position: absolute;
     font-size: $font-size-xl;
     color: color(light);
 
     @include if-desktop-xl {
+      height: 180px;
+      width: 180px;
       font-size: $font-size-xxl;
+
     }
   }
 

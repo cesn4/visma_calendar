@@ -35,7 +35,7 @@ const Main: FunctionComponent<MainReduxProps> = ({
                   "-active": calendarState,
                 })}
               >
-                <Calendar />
+                <Calendar activeDate={slug} />
               </div>
             </Col>
           </Row>
@@ -46,7 +46,7 @@ const Main: FunctionComponent<MainReduxProps> = ({
                   "-active": eventFormState,
                 })}
               >
-                <EventForm events={events}/>
+                <EventForm events={events} />
               </div>
             </Col>
           </Row>

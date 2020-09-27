@@ -71,22 +71,43 @@
     }
   }
 
+
   &__day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    width: 45px;
     font-size: $font-size-sm;
-    padding: 5px 10px;
     text-decoration: none;
     color: color(dark);
+    border-radius: 15px;
 
     &.-blank {
       visibility: hidden;
     }
 
+    &.-current {
+      background-color: color(dark);
+      color: color(light);
+      box-shadow: $shadow-full;
+    }
+
+    &.-active {
+      border: 1px solid color(dark);
+      box-shadow: $shadow-full;
+    }
+
     @include if-tablet {
       font-size: $font-size-ml;
+      height: 70px;
+      width: 70px;
     }
 
     @include if-desktop-xl {
       font-size: $font-size-l;
+      height: 100px;
+      width: 100px;
     }
   }
 

@@ -60,13 +60,15 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
     singleValue: (provided: any) => ({
       ...provided,
       fontFamily: "monospace",
-      fontSize: "2rem",
+      fontSize: "1.5rem",
     }),
   };
   return (
     <div className={className}>
       <Select
         closeMenuOnSelect={multi ? false : true}
+        inputProps={{readOnly:true}}
+        isSearchable={ false }
         onChange={onChange}
         isMulti={multi}
         styles={customStyles}

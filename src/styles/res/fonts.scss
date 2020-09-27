@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Scope+One&display=swap');
 
-$font-family-primary: 'Scope One', serif;
+$font-family-primary: monoscope;
 
 @function px-to-rem($_size) {
     $rem-size: $_size / 16px;

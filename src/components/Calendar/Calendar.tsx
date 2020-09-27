@@ -9,12 +9,16 @@ import { SetCalendarState } from "~/store/actions";
 
 import "./Calendar.scss";
 
-const Calendar: FunctionComponent = () => {
+const Calendar: FunctionComponent<CalendarProps> = ({
+  activeDate,
+}: CalendarProps) => {
   const className = "calendar";
+  const currentDay = DateTime.local().day;
   const currentMonth = DateTime.local().month;
-  const [activeMonth, setActiveMonth] = useState(currentMonth);
+  const activeScheduleDate = DateTime.fromISO(activeDate);
+  const [activeCalendarMonth, setActiveCalendarMonth] = useState(currentMonth);
 
-  const month = DateTime.local(2020, activeMonth, 1);
+  const month = DateTime.local(2020, activeCalendarMonth, 1);
   const totalDaysNumber = month.daysInMonth;
   const monthName = month.monthLong;
 
@@ -33,7 +37,7 @@ const Calendar: FunctionComponent = () => {
   );
 
   //Month end blank days
-  const lastWeekday = DateTime.local(2020, activeMonth, totalDaysNumber)
+  const lastWeekday = DateTime.local(2020, activeCalendarMonth, totalDaysNumber)
     .weekday;
   const endBlankDayNumber = 7 - lastWeekday;
   let endBlankArray: Array<number> = [];
@@ -60,7 +64,9 @@ const Calendar: FunctionComponent = () => {
   const renderCalendarContent = weekdays.map((weekday, index) => {
     const days = daysFillter(index + 1);
     const renderDays = days.map((day: number, index: number) => {
-      const monthISO = activeMonth.toLocaleString("en-US", {
+      let isCurrent = false;
+      let isActive = false;
+      const monthISO = activeCalendarMonth.toLocaleString("en-US", {
         minimumIntegerDigits: 2,
         useGrouping: false,
       });
@@ -68,12 +74,23 @@ const Calendar: FunctionComponent = () => {
         minimumIntegerDigits: 2,
         useGrouping: false,
       });
+      if (currentMonth === activeCalendarMonth && currentDay === day) {
+        isCurrent = true;
+      }
+      if (
+        activeCalendarMonth === activeScheduleDate.month &&
+        day === activeScheduleDate.day
+      ) {
+        isActive = true;
+      }
       return (
         <Link
           to={`2020-${monthISO}-${dayISO}`}
           key={index.toString() + "day"}
           className={classNames(`${className}__day`, {
             "-blank": day === 0,
+            "-current": isCurrent,
+            "-active": isActive,
           })}
           onClick={() => SetCalendarState(false)}
         >
@@ -98,7 +115,7 @@ const Calendar: FunctionComponent = () => {
       <div className={`${className}__date-box`}>
         <button
           className={`${className}__button`}
-          onClick={() => setActiveMonth((e) => e - 1)}
+          onClick={() => setActiveCalendarMonth((e) => e - 1)}
         >
           <Icon name="leftArrow" size={30} />
         </button>
@@ -106,7 +123,7 @@ const Calendar: FunctionComponent = () => {
         <span className={`${className}__label`}>{month.year}</span>
         <button
           className={`${className}__button`}
-          onClick={() => setActiveMonth((e) => e + 1)}
+          onClick={() => setActiveCalendarMonth((e) => e + 1)}
         >
           <Icon name="rightArrow" size={30} />
         </button>
@@ -117,5 +134,9 @@ const Calendar: FunctionComponent = () => {
     </div>
   );
 };
+
+interface CalendarProps {
+  activeDate: string;
+}
 
 export default Calendar;
