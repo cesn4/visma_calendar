@@ -96,8 +96,8 @@
 
     @include if-tablet {
       font-size: $font-size-ml;
-      height: $spacing-xl;
-      width: $spacing-xl;
+      height: 60px;
+      width: 60px;
     }
 
     @include if-desktop-xl {
