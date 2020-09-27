@@ -1,11 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500&display=swap');
-// $font-family-primary: 'Inconsolata', monospace;
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap');
 $font-family-primary: 'Antic Slab', serif;
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-// $font-family-primary: 'Righteous', cursive;
-@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
-// $font-family-primary: 'Gruppo', cursive;
 
 @function px-to-rem($_size) {
     $rem-size: $_size / 16px;
