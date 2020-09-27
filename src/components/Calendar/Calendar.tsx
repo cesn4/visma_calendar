@@ -15,10 +15,12 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   const className = "calendar";
   const currentDay = DateTime.local().day;
   const currentMonth = DateTime.local().month;
+  const currentYear = DateTime.local().year;
   const activeScheduleDate = DateTime.fromISO(activeDate);
   const [activeCalendarMonth, setActiveCalendarMonth] = useState(currentMonth);
+  const [activeCalendarYear, setActiveCalendarYear] = useState(currentYear);
 
-  const month = DateTime.local(2020, activeCalendarMonth, 1);
+  const month = DateTime.local(activeCalendarYear, activeCalendarMonth, 1);
   const totalDaysNumber = month.daysInMonth;
   const monthName = month.monthLong;
 
@@ -37,8 +39,11 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   );
 
   //Month end blank days
-  const lastWeekday = DateTime.local(2020, activeCalendarMonth, totalDaysNumber)
-    .weekday;
+  const lastWeekday = DateTime.local(
+    activeCalendarYear,
+    activeCalendarMonth,
+    totalDaysNumber
+  ).weekday;
   const endBlankDayNumber = 7 - lastWeekday;
   let endBlankArray: Array<number> = [];
   if (endBlankDayNumber !== 0) {
@@ -73,12 +78,17 @@ const Calendar: FunctionComponent<CalendarProps> = ({
         minimumIntegerDigits: 2,
         useGrouping: false,
       });
-      if (currentMonth === activeCalendarMonth && currentDay === day) {
+      if (
+        currentMonth === activeCalendarMonth &&
+        currentDay === day &&
+        activeCalendarYear === currentYear
+      ) {
         isCurrent = true;
       }
       if (
         activeCalendarMonth === activeScheduleDate.month &&
-        day === activeScheduleDate.day
+        day === activeScheduleDate.day &&
+        activeCalendarYear === currentYear
       ) {
         isActive = true;
       }
@@ -114,7 +124,14 @@ const Calendar: FunctionComponent<CalendarProps> = ({
       <div className={`${className}__date-box`}>
         <button
           className={`${className}__button`}
-          onClick={() => setActiveCalendarMonth((e) => e - 1)}
+          onClick={() =>
+            setActiveCalendarMonth((e) => {
+              if (e === 1) {
+                setActiveCalendarYear((e) => e - 1);
+                return 12;
+              } else return e - 1;
+            })
+          }
         >
           <Icon name="leftArrow" size={30} />
         </button>
@@ -122,7 +139,14 @@ const Calendar: FunctionComponent<CalendarProps> = ({
         <span className={`${className}__label`}>{month.year}</span>
         <button
           className={`${className}__button`}
-          onClick={() => setActiveCalendarMonth((e) => e + 1)}
+          onClick={() =>
+            setActiveCalendarMonth((e) => {
+              if (e === 12) {
+                setActiveCalendarYear((e) => e + 1);
+                return 1;
+              } else return e + 1;
+            })
+          }
         >
           <Icon name="rightArrow" size={30} />
         </button>
