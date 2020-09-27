@@ -12,11 +12,13 @@ const FancyInput: FunctionComponent<FancyInputProps> = ({
 }: FancyInputProps) => {
   const className = "fancy-input";
   return (
-    <div  className={classNames(`${className}`, {
-      "-smaller": smaller,
-    })}>
+    <div
+      className={classNames(`${className}`, {
+        "-smaller": smaller,
+      })}
+    >
       <input
-      onChange={handleChange}
+        onChange={handleChange}
         id={id}
         className={`${className}__input`}
         type={type}

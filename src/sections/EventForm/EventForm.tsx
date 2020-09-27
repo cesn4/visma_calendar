@@ -1,12 +1,10 @@
 import React, { FunctionComponent, useState } from "react";
 import FancyButton from "~/components/FancyButton";
-import Select from "react-select";
 
 import FancyInput from "~/components/FancyInput";
 import FancySelect from "~/components/FancySelect";
-import { weekdays } from "~/mock/weekdays";
 import { AddEvent, SetEventFormState } from "~/store/actions";
-import { EventObject, RepetitionType } from "~/store/types/eventTypes";
+import { EventObject } from "~/store/types/eventTypes";
 
 import "./EventForm.scss";
 
@@ -14,10 +12,10 @@ const EventForm: FunctionComponent<EventFormProps> = ({
   events,
 }: EventFormProps) => {
   const className = "event-form";
-  const repetitionOptions: Array<RepetitionType> = [
-    "Once",
-    "Always",
-    "Every two weeks",
+  const repetitionOptions = [
+    { value: "Once", label: "Once" },
+    { value: "Always", label: "Always" },
+    { value: "Every two weeks", label: "Every two weeks" },
   ];
 
   const weekdayOptions = [
@@ -37,7 +35,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     repetition: "Once",
     daysToRepeat: [""],
   });
-  console.log(eventInformation);
+
   const handleChange = (e: any) => {
     setEventInformation({
       ...eventInformation,
@@ -66,48 +64,6 @@ const EventForm: FunctionComponent<EventFormProps> = ({
     }
   };
 
-  const customStyles = {
-    menu: (provided: any, state: any) => ({
-      ...provided,
-      border: "1px solid #2d2e31",
-      width: state.selectProps.width,
-      color: state.selectProps.menuColor,
-    }),
-    control: (provided: any, state: any) => ({
-      ...provided,
-      border: "none",
-      height: "78.750px",
-      backgroundColor: "#F9F9F9",
-      outline: "none",
-    }),
-    placeholder: (provided: any, state: any) => ({
-      ...provided,
-      color: "#2d2e31",
-    }),
-    multiValue: (provided: any, state: any) => ({
-      ...provided,
-      backgroundColor: "#2d2e31",
-      color: "#F9F9F9",
-    }),
-    multiValueLabel: (provided: any, state: any) => ({
-      ...provided,
-      color: "#F9F9F9",
-      paddingBottom: "0",
-    }),
-    dropdownIndicator: (provided: any, state: any) => ({
-      ...provided,
-      color: "#2d2e31",
-    }),
-    indicatorSeparator: (provided: any, state: any) => ({
-      ...provided,
-      backgroundColor: "#2d2e31",
-    }),
-    clearIndicator: (provided: any, state: any) => ({
-      ...provided,
-      color: "#2d2e31",
-    }),
-  };
-
   return (
     <div className={className}>
       <FancyInput
@@ -125,12 +81,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       />
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Repetition</span>
-        <FancySelect
-          handleChange={handleChange}
-          name="Repetition"
-          id="repetition"
-          options={repetitionOptions}
-        />
+        <FancySelect onChange={() => console.log()} options={repetitionOptions} />
       </div>
       <div className={`${className}__smaller-box`}>
         <span className={`${className}__label`}>Time</span>
@@ -144,25 +95,7 @@ const EventForm: FunctionComponent<EventFormProps> = ({
       ) : (
         <div className={`${className}__smaller-box`}>
           <span className={`${className}__label`}>Days to repeat</span>
-          <div className={`${className}__select`}></div>
-          <Select
-            closeMenuOnSelect={false}
-            isMulti
-            styles={customStyles}
-            options={weekdayOptions}
-            theme={(theme) => ({
-              ...theme,
-              // borderRadius: 0,
-              colors: {
-                ...theme.colors,
-                primary: "#2d2e31",
-                neutral40: "#2d2e31",
-                neutral30: "#2d2e31",
-                neutral20: "#2d2e31",
-                neutral50: "#2d2e31",
-              },
-            })}
-          />
+          <FancySelect multi onChange={() => {}} options={weekdayOptions} />
         </div>
       )}
       <div className={`${className}__button-box`}>

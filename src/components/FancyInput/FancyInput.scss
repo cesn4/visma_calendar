@@ -17,6 +17,7 @@
   }
 
   &__input {
+    font-family: monospace;
     height: 100%;
     width: 100%;
     border: none;
@@ -29,6 +30,7 @@
       font-family: $font-family-primary;
       font-size: $font-size-m;
       color: color(dark);
+      background-color: color(light);
     }
   }
 }

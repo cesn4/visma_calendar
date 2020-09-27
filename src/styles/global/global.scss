@@ -10,6 +10,6 @@ body {
     color: color(dark);
 }
 
-button {
-    outline: none;
+input:focus {
+    outline:none;
 }
