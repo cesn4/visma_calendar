@@ -6,15 +6,10 @@ import "./EventCard.scss";
 
 const EventCard: FunctionComponent<EventCardProps> = ({
   data,
-  isFirst = false,
-  isLast = false,
 }: EventCardProps) => {
   const className = "event-card";
   return (
-    <div className={classNames(`${className}`, {
-      "-first": isFirst,
-      "-last": isLast,
-    })}>
+    <div className={classNames(`${className}`)}>
       <div className={`${className}__title-box`}>
         <span className={`${className}__time`}>{data.time}</span>
         <span className={`${className}__title`}>{data.title}</span>
@@ -24,10 +19,8 @@ const EventCard: FunctionComponent<EventCardProps> = ({
   );
 };
 
-interface EventCardProps {
+export interface EventCardProps {
   data: EventObject;
-  isFirst?: boolean;
-  isLast?: boolean;
 }
 
 export default EventCard;

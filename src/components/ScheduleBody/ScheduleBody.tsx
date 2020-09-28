@@ -62,7 +62,7 @@ const ScheduleBody: FunctionComponent<ScheduleBodyProps> = ({
   return <div className={className}>{renderEvents}</div>;
 };
 
-interface ScheduleBodyProps {
+export interface ScheduleBodyProps {
   events: Array<EventObject>;
   date: string;
 }

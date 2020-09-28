@@ -28,7 +28,7 @@ const FancyInput: FunctionComponent<FancyInputProps> = ({
   );
 };
 
-interface FancyInputProps {
+export interface FancyInputProps {
   placeholder?: string;
   id: string;
   type: string;
