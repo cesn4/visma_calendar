@@ -60,7 +60,7 @@ const Main: FunctionComponent<MainReduxProps> = ({
   );
 };
 
-interface MainReduxProps {
+export interface MainReduxProps {
   calendarState: boolean;
   eventFormState: boolean;
   events: Array<EventObject>;

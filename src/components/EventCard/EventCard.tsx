@@ -19,7 +19,7 @@ const EventCard: FunctionComponent<EventCardProps> = ({
   );
 };
 
-interface EventCardProps {
+export interface EventCardProps {
   data: EventObject;
 }
 

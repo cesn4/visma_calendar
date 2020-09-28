@@ -89,7 +89,7 @@ const FancySelect: FunctionComponent<FancySelectProps> = ({
   );
 };
 
-interface FancySelectProps {
+export interface FancySelectProps {
   options: Array<Object>;
   onChange: (e: any) => void;
   multi?: boolean;

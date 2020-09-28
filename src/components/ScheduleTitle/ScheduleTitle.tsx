@@ -16,16 +16,20 @@ const ScheduleTitle: FunctionComponent<ScheduleTitleProps> = ({
   return (
     <div className={className}>
       <div className={`${className}__label-box`}>
-        <span className={`${className}__label`}>Events for {activeDate.monthLong}</span>
-          <span className={`${className}__day`}>{activeDate.day}</span>
-        <span className={`${className}__label -weekday`}>{activeDate.weekdayLong}</span>
+        <span className={`${className}__label`}>
+          Events for {activeDate.monthLong}
+        </span>
+        <span className={`${className}__day`}>{activeDate.day}</span>
+        <span className={`${className}__label -weekday`}>
+          {activeDate.weekdayLong}
+        </span>
       </div>
       <div className={`${className}__button-box`}>
-        <div className={`${className}__calendar-icon`}>
-          <Icon
-            onClick={() => SetCalendarState(!calendarState)}
-            name="calendar"
-          />
+        <div
+          onClick={() => SetCalendarState(!calendarState)}
+          className={`${className}__calendar-icon`}
+        >
+          <Icon name="calendar" />
         </div>
         <Icon name="add" onClick={() => SetEventFormState(true)} />
       </div>

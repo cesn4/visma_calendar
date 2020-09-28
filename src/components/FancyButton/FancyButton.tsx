@@ -14,7 +14,7 @@ const FancyButton: FunctionComponent<FancyButtonProps> = ({
   );
 };
 
-interface FancyButtonProps {
+export interface FancyButtonProps {
   label: string;
   onClick: VoidFunction;
 }

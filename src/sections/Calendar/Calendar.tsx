@@ -154,7 +154,7 @@ const Calendar: FunctionComponent<CalendarProps> = ({
   );
 };
 
-interface CalendarProps {
+export interface CalendarProps {
   activeDate: string;
 }
 
